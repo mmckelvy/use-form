@@ -1,0 +1,29 @@
+{
+  "name": "@mmckelvy/use-form",
+  "version": "1.0.0",
+  "description": "Simple, hooks based React form utility.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "type": "module",
+  "keywords": [
+    "React",
+    "form",
+    "hooks"
+  ],
+  "author": "Mark McKelvy",
+  "license": "MIT",
+  "dependencies": {
+    "@mmckelvy/case": "^1.2.0"
+  },
+  "devDependencies": {
+    "ava": "^4.3.3"
+  },
+  "ava": {
+    "files": [
+      "./src/*.test.js"
+    ],
+    "verbose": true
+  }
+}
