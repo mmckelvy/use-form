@@ -25,7 +25,7 @@ export default function validateForm({
         return acc;
       }, {});
 
-      const result = !field.validate || field.disabled
+      const result = !field.validate
         ? {
             isValid: true,
             value: val,
