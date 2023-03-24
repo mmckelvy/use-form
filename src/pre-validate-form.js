@@ -22,7 +22,7 @@ export default function preValidateForm({ _fields }) {
         return acc;
       }, {});
 
-      results[flatPath] = !field.preValidate || field.disabled
+      results[flatPath] = !field.preValidate
         ? val
         : field.preValidate({
             value: val,
