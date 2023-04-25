@@ -25,17 +25,31 @@ export default function validateForm({
         return acc;
       }, {});
 
-      const result = !field.validate
-        ? {
-            isValid: true,
-            value: val,
-            error: null
-          }
-        : field.validate({
-            value: val,
-            field,
-            fields: structure(_preValidatedFields)
-          });
+      let result;
+
+      if (!field.validate) {
+        result = {
+          isValid: true,
+          value: val,
+          error: null
+        };
+
+      } else if (field.schema) {
+        const r = field.schema.validate(val);
+
+        result = {
+          isValid: !r.error,
+          value: val,
+          error: r.error ? r.error.details.message : null
+        }
+
+      } else {
+        result = field.validate({
+          value: val,
+          field,
+          fields: structure(_preValidatedFields)
+        });
+      }
 
       const errorKey = [...pathToFieldName, 'error'].join('.');
       const isValidKey = [...pathToFieldName, 'isValid'].join('.');

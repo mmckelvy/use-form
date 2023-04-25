@@ -6,6 +6,7 @@ import structure from './structure.js';
 import _removeField from './remove-field.js';
 import _handleSubmit from './handle-submit.js';
 import checkFormChanged from './check-form-changed.js';
+import buildUpdate from './build-update.js';
 
 function _handleChange(e, _setFields) {
   const name = e.target.name;
@@ -48,7 +49,15 @@ export default function useForm(initialFields = {}) {
 
   return {
     fields: structure(_fields),
-    setFields: (fields, options = {}) => {
+    setFields: (update) => {
+      _setFields((prevFields) => {
+        return {
+          ...prevFields,
+          ...buildUpdate(update)
+        }
+      });
+    },
+    replaceFields: (fields, options = {}) => {
       let updatedFields;
       
       _setFields((_prevFields) => {

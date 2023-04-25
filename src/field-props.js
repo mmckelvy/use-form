@@ -6,6 +6,7 @@ export default [
   'value',
   'displayValue',
   'checked',
+  'snapshot',
 
   // state data
   'error',
@@ -24,8 +25,9 @@ export default [
   'required',
   'preValidate',
   'validate',
+  'schema',
 
   // serialize
   'serialize',
-  'exclude'
+  'exclude',
 ];

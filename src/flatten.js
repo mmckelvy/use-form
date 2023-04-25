@@ -78,6 +78,10 @@ export default function flatten(fields) {
           val.exclude = false;
         }
 
+        if (!val.hasOwnProperty('snapshot')) {
+          val.snapshot = '';
+        }
+
         // Add the path for convenience.
         val.path = [...path, key].join('.');
 
