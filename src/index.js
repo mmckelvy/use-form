@@ -54,7 +54,7 @@ export default function useForm(initialFields = {}) {
         return {
           ...prevFields,
           ...buildUpdate(update)
-        }
+        };
       });
     },
     replaceFields: (fields, options = {}) => {
