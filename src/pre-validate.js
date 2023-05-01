@@ -36,6 +36,9 @@ function parseNumeric(val) {
   return val;
 }
 
+/**
+ * @return {string} or {number} value
+ * */
 export default function preValidate({ value, field }) {
   if (value instanceof Date) {
     return value.toISOString();

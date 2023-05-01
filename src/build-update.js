@@ -1,5 +1,8 @@
 import parsePath from './parse-path.js';
 
+/*
+@param {array of objects} update - Keys should be 'path' and 'value'
+*/
 export default function buildUpdate(update) {
   const u = {};
 
