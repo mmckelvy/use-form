@@ -10,6 +10,8 @@ const common = {
   resolve: {
     alias: {
       views: path.join(__dirname, 'test/app/frontend/js/src/views'),
+      components: path.join(__dirname, 'test/app/frontend/js/src/components'),
+      useForm: path.join(__dirname, 'test/app/frontend/js/src/use-form.js'),
     }
   },
   plugins: [

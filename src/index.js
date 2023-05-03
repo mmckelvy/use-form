@@ -85,10 +85,6 @@ export default function useForm(initialFields = {}) {
     handleChange: (e) => {
       _handleChange(e, _setFields);
     },
-    // What does this do?
-    validateFields: (fields) => {
-      // runs validation on a few fields at a time.
-    },
     handleSubmit: () => {
       return _handleSubmit({_fields, _setFields});
     },

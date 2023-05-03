@@ -62,7 +62,6 @@ export default function flatten(fields) {
           val.preValidate = preValidate;
         }
 
-
         if (!val.hasOwnProperty('validate')) {
           val.validate = validate;
         }
