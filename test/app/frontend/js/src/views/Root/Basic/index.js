@@ -3,7 +3,7 @@ import React from 'react';
 import useForm from 'useForm';
 
 export default function Basic() {
-  const { fields, setFields, handleChange, handleSubmit } = useForm({
+  const { fields, handleChange, handleSubmit } = useForm({
     firstName: {
       value: ''
     },

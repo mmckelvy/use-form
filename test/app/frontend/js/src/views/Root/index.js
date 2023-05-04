@@ -5,6 +5,7 @@ import './style.css';
 import { Route } from 'components';
 
 import Basic from './Basic';
+import WithArrays from './WithArrays';
 
 export default function Root() {
   return (
@@ -12,6 +13,11 @@ export default function Root() {
       <Route
         path="/basic"
         element={<Basic />}
+      />
+
+      <Route
+        path="/with-arrays"
+        element={<WithArrays />}
       />
     </div>
   );
