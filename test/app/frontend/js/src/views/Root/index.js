@@ -6,6 +6,7 @@ import { Route } from 'components';
 
 import Basic from './Basic';
 import WithArrays from './WithArrays';
+import WithSelects from './WithSelects';
 
 export default function Root() {
   return (
@@ -18,6 +19,11 @@ export default function Root() {
       <Route
         path="/with-arrays"
         element={<WithArrays />}
+      />
+
+      <Route
+        path="/with-selects"
+        element={<WithSelects />}
       />
     </div>
   );
