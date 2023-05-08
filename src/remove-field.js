@@ -1,6 +1,8 @@
+import parsePath from './parse-path.js';
+
 export default function removeField(path, _fields) {
   return Object.entries(_fields).reduce((acc, [ key, val ]) => {
-    const p = path.split('.');
+    const p = parsePath(path);
     const k = key.split('.');
     
     // We should remove if the current key segments match all of the

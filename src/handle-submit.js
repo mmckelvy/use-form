@@ -39,7 +39,9 @@ becomes:
   address: '123 Fake Street'
 }
 */
-export default function handleSubmit({ _fields, _setFields }) {
+export default function handleSubmit({ fields, _fields, _setFields }) {
+  // filter fields here...
+
   const preValidated = preValidateForm({_fields});
 
   const { isValid, _validatedFields } = validateForm({

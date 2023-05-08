@@ -17,6 +17,7 @@
     "form",
     "hooks"
   ],
+  "type": "module",
   "author": "Mark McKelvy",
   "license": "MIT",
   "dependencies": {

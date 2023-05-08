@@ -63,6 +63,7 @@ test('flatten - case 1', t => {
     'basics.fruit.preValidate': false,
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
+    'basics.fruit.snapshot': '',
 
     'basics.recipients.0.person.firstName.allowEmpty': false,
     'basics.recipients.0.person.firstName.value': 'Joe',
@@ -76,6 +77,7 @@ test('flatten - case 1', t => {
     'basics.recipients.0.person.firstName.preValidate': false,
     'basics.recipients.0.person.firstName.validate': false,
     'basics.recipients.0.person.firstName.disabled': false,
+    'basics.recipients.0.person.firstName.snapshot': '',
 
     'basics.recipients.1.person.firstName.allowEmpty': false,
     'basics.recipients.1.person.firstName.value': 'Bill',
@@ -89,6 +91,7 @@ test('flatten - case 1', t => {
     'basics.recipients.1.person.firstName.preValidate': false,
     'basics.recipients.1.person.firstName.validate': false,
     'basics.recipients.1.person.firstName.disabled': false,
+    'basics.recipients.1.person.firstName.snapshot': '',
 
     'order.orderNumber.allowEmpty': false,
     'order.orderNumber.value': '2453',
@@ -102,6 +105,7 @@ test('flatten - case 1', t => {
     'order.orderNumber.preValidate': false,
     'order.orderNumber.validate': false,
     'order.orderNumber.disabled': false,
+    'order.orderNumber.snapshot': '',
 
     'products': null
   };
