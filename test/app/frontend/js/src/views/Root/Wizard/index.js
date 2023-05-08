@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useForm from 'useForm';
 
@@ -7,14 +7,40 @@ import { Route } from 'components';
 import PageOne from './PageOne';
 import PageTwo from './PageTwo';
 import PageThree from './PageThree';
+import SubmitPage from './SubmitPage';
 
 export default function Wizard() {
+  const [ page, setPage ] = useState(1);
+
   const { fields, handleChange, setFields, handleSubmit } = useForm({
-    firstName: {
-      value: ''
+    basics: {
+      firstName: {
+        value: ''
+      },
+      lastName: {
+        value: ''
+      },
     },
-    lastName: {
-      value: ''
+    shipping: {
+      address: {
+        value: ''
+      },
+      methodIndex: {
+        value: 0,
+        exclude: true,
+        type: 'number'
+      },
+      methodName: {
+        value: 'Ground'
+      },
+    },
+    payment: {
+      creditCardNumber: {
+        value: ''
+      },
+      expiration: {
+        value: ''
+      },
     }
   });
 
@@ -29,35 +55,39 @@ export default function Wizard() {
         rowGap: '8px'
       }}>
 
-      <Route
-        path="/wizard/1"
-        element={
-          <PageOne
-            fields={fields}
-            setFields={setFields}
-          />
-        }
-      />
+      {page === 1 &&
+        <PageOne
+          basics={fields.basics}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          setPage={setPage}
+        />
+      }
 
-      <Route
-        path="/wizard/2"
-        element={
-          <PageTwo
-            fields={fields}
-            setFields={setFields}
-          />
-        }
-      />
+      {page === 2 &&
+        <PageTwo
+          shipping={fields.shipping}
+          handleChange={handleChange}
+          setFields={setFields}
+          handleSubmit={handleSubmit}
+          setPage={setPage}
+        />
+      }
 
-      <Route
-        path="/wizard/3"
-        element={
-          <PageThree
-            fields={fields}
-            setFields={setFields}
-          />
-        }
-      />
+      {page === 3 &&
+        <PageThree
+          payment={fields.payment}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          setPage={setPage}
+        />
+      }
+
+      {page === 4 &&
+        <SubmitPage
+          handleSubmit={handleSubmit}
+        />
+      }
 
     </div>
   );

@@ -85,8 +85,8 @@ export default function useForm(initialFields = {}) {
     handleChange: (e) => {
       _handleChange(e, _setFields);
     },
-    handleSubmit: () => {
-      return _handleSubmit({_fields, _setFields});
+    handleSubmit: ({ fields } = {}) => {
+      return _handleSubmit({_fields, _setFields, fields});
     },
     reset: () => {
       _setFields(resetPoint);

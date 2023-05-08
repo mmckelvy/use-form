@@ -1,6 +1,7 @@
 import preValidateForm from './pre-validate-form.js';
 import validateForm from './validate-form.js';
 import serializeForm from './serialize-form.js';
+import filterFields from './filter-fields.js';
 
 /*
 Pre-validates, validates, and then serializes a set of _fields.
@@ -39,10 +40,11 @@ becomes:
   address: '123 Fake Street'
 }
 */
-export default function handleSubmit({ fields, _fields, _setFields }) {
-  // filter fields here...
+export default function handleSubmit({ _fields, _setFields, fields }) {
+  // Filter any fields if necessary.
+  const f = filterFields({_fields, fields});
 
-  const preValidated = preValidateForm({_fields});
+  const preValidated = preValidateForm({_fields: f});
 
   const { isValid, _validatedFields } = validateForm({
     _preValidatedFields: preValidated,

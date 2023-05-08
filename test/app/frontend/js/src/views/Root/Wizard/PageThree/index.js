@@ -2,8 +2,8 @@ import React from 'react';
 
 import useForm from 'useForm';
 
-export default function PageOne({
-  basics,
+export default function PageThree({
+  payment,
   handleChange,
   handleSubmit,
   setPage
@@ -27,16 +27,16 @@ export default function PageOne({
         }}>
 
         <label style={{fontSize: '12px'}}>
-          {basics.firstName.label}
+          {payment.creditCardNumber.label}
         </label>
 
         <input
-          name="basics.firstName"
-          value={basics.firstName.value}
+          name="payment.creditCardNumber"
+          value={payment.creditCardNumber.value}
           onChange={handleChange}
         />
 
-        <span style={{color: 'red'}}>{basics.firstName.error}</span>
+        <span style={{color: 'red'}}>{payment.creditCardNumber.error}</span>
 
       </div>
 
@@ -48,16 +48,16 @@ export default function PageOne({
         }}>
 
         <label style={{fontSize: '12px'}}>
-          {basics.lastName.label}
+          {payment.expiration.label}
         </label>
 
         <input
-          name="basics.lastName"
-          value={basics.lastName.value}
+          name="payment.expiration"
+          value={payment.expiration.value}
           onChange={handleChange}
         />
 
-        <span style={{color: 'red'}}>{basics.lastName.error}</span>
+        <span style={{color: 'red'}}>{payment.expiration.error}</span>
 
       </div>
 
@@ -70,7 +70,9 @@ export default function PageOne({
 
         <button
           type="button"
-          disabled>
+          onClick={() =>{
+            setPage(3);
+          }}>
 
           Back
         </button>
@@ -80,21 +82,20 @@ export default function PageOne({
           onClick={() => {
             const { isValid, values } = handleSubmit({
               fields: [
-                {path: 'basics'}
+                {path: 'payment'}
               ]
             });
 
             console.log(values);
 
             if (isValid) {
-              setPage(2);
+              setPage(4);
             }
           }}>
 
           Next
         </button>
       </div>
-
 
     </div>
   );

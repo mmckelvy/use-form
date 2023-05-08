@@ -2,12 +2,24 @@ import React from 'react';
 
 import useForm from 'useForm';
 
-export default function PageOne({
-  basics,
+export default function PageTwo({
+  shipping,
   handleChange,
+  setFields,
   handleSubmit,
   setPage
 }) {
+  const options = [
+    {
+      methodIndex: 0,
+      methodName: 'Ground',
+    },
+    {
+      methodIndex: 1,
+      methodName: 'Two Day Select',
+    },
+  ];
+
   return (
     <div
       style={{
@@ -27,16 +39,16 @@ export default function PageOne({
         }}>
 
         <label style={{fontSize: '12px'}}>
-          {basics.firstName.label}
+          {shipping.address.label}
         </label>
 
         <input
-          name="basics.firstName"
-          value={basics.firstName.value}
+          name="shipping.address"
+          value={shipping.address.value}
           onChange={handleChange}
         />
 
-        <span style={{color: 'red'}}>{basics.firstName.error}</span>
+        <span style={{color: 'red'}}>{shipping.address.error}</span>
 
       </div>
 
@@ -47,17 +59,28 @@ export default function PageOne({
           rowGap: '8px'
         }}>
 
-        <label style={{fontSize: '12px'}}>
-          {basics.lastName.label}
-        </label>
+        <select
+          value={shipping.methodIndex.value}
+          onChange={(e) => {
+            const index = e.target.value;
 
-        <input
-          name="basics.lastName"
-          value={basics.lastName.value}
-          onChange={handleChange}
-        />
+            setFields([
+              {
+                path: 'shipping.methodIndex.value',
+                value: index
+              },
+              {
+                path: 'shipping.methodName.value',
+                value: options[index].methodName
+              },
+            ]);
+          }}>
 
-        <span style={{color: 'red'}}>{basics.lastName.error}</span>
+          {options.map((o, i) => {
+            return <option key={i} value={i}>{o.methodName}</option>;
+          })}
+
+        </select>
 
       </div>
 
@@ -70,7 +93,9 @@ export default function PageOne({
 
         <button
           type="button"
-          disabled>
+          onClick={() => {
+            setPage(1);
+          }}>
 
           Back
         </button>
@@ -80,23 +105,24 @@ export default function PageOne({
           onClick={() => {
             const { isValid, values } = handleSubmit({
               fields: [
-                {path: 'basics'}
+                {path: 'shipping'}
               ]
             });
 
             console.log(values);
 
             if (isValid) {
-              setPage(2);
+              setPage(3);
             }
+
           }}>
 
           Next
         </button>
       </div>
 
-
     </div>
   );
 }
+
 
