@@ -8,6 +8,7 @@ import Basic from './Basic';
 import WithArrays from './WithArrays';
 import WithSelects from './WithSelects';
 import Wizard from './Wizard';
+import Undo from './Undo';
 
 export default function Root() {
   return (
@@ -30,6 +31,11 @@ export default function Root() {
       <Route
         path="/wizard"
         element={<Wizard />}
+      />
+
+      <Route
+        path="/undo"
+        element={<Undo />}
       />
     </div>
   );
