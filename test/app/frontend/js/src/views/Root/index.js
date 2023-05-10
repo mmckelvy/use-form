@@ -10,6 +10,7 @@ import WithSelects from './WithSelects';
 import Wizard from './Wizard';
 import Undo from './Undo';
 import ResetForm from './ResetForm';
+import KitchenSink from './KitchenSink';
 
 export default function Root() {
   return (
@@ -41,6 +42,10 @@ export default function Root() {
       <Route
         path="/reset-form"
         element={<ResetForm />}
+      />
+      <Route
+        path="/kitchen-sink"
+        element={<KitchenSink />}
       />
     </div>
   );

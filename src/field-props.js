@@ -25,7 +25,6 @@ export default [
   'required',
   'preValidate',
   'validate',
-  'schema',
 
   // serialize
   'serialize',

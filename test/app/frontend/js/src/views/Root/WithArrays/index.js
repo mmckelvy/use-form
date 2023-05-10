@@ -92,6 +92,7 @@ export default function WithArrays() {
 
         <button
           type="button"
+          disabled={fields.recipients.length < 2}
           onClick={() => {
             const r = fields.recipients.slice(0, fields.recipients.length - 1)
 
