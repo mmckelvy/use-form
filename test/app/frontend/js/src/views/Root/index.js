@@ -9,6 +9,7 @@ import WithArrays from './WithArrays';
 import WithSelects from './WithSelects';
 import Wizard from './Wizard';
 import Undo from './Undo';
+import ResetForm from './ResetForm';
 
 export default function Root() {
   return (
@@ -36,6 +37,10 @@ export default function Root() {
       <Route
         path="/undo"
         element={<Undo />}
+      />
+      <Route
+        path="/reset-form"
+        element={<ResetForm />}
       />
     </div>
   );
