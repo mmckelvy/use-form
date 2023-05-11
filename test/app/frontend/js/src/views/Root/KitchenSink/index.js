@@ -66,7 +66,7 @@ export default function KitchenSink() {
             return {
               isValid: false,
               value,
-              error: `${field.label} must be greater than 10`
+              error: `${field.label} must be greater than 0`
             };
           }
         },
@@ -84,7 +84,7 @@ export default function KitchenSink() {
     shipping: {
       destination: {
         value: 0,
-        displayValue: 'Ground',
+        displayValue: 'Domestic',
         preValidate: false,
         validate: false,
         serialize: ({ field }) => {
@@ -93,6 +93,7 @@ export default function KitchenSink() {
       },
       method: {
         value: 0,
+        displayValue: 'Ground',
         preValidate: false,
         validate: false,
         serialize: ({ field }) => {
@@ -106,7 +107,8 @@ export default function KitchenSink() {
     },
     feedback: {
       value: '',
-      allowEmpty: true
+      required: false,
+      includeEmpty: true
     }
   });
 
@@ -257,7 +259,7 @@ export default function KitchenSink() {
                     return {
                       isValid: false,
                       value,
-                      error: `${field.label} must be greater than 10`
+                      error: `${field.label} must be greater than 0`
                     };
                   }
                 },
