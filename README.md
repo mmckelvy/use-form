@@ -52,6 +52,10 @@ export default function MyForm() {
 ```
 
 
+
+
+Code for the examples is located in the [Examples](./examples/app/frontend/js/src/views/Examples) folder.
+
 ### Description
 #### Overview
 Call the `useForm` hook and pass it an `initialFields` object.  `useForm` will return:

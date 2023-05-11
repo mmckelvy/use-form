@@ -14,8 +14,25 @@ import KitchenSink from './KitchenSink';
 
 export default function Root() {
   return (
-    <div>
+    <div
+      style={{
+        padding: '24px'
+      }}>
+
+      <div
+        style={{
+          marginBottom: '24px',
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          rowGap: '8px'
+        }}>
+
+        <a href="/basic">Basic</a>
+      </div>
+
+
       <Route
+        index
         path="/basic"
         element={<Basic />}
       />

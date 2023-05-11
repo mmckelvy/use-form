@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "ava",
-    "start:dev": "node ./examples/app/server.js",
+    "start:dev": "node ./demo/app/server.js",
     "watch:dev": "webpack --config webpack.dev.js --watch --progress"
   },
   "repository": {

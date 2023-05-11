@@ -5,26 +5,26 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const common = {
   entry: {
-    app: path.join(__dirname, 'examples/app/frontend/js/src/index.js'),
+    app: path.join(__dirname, 'demo/app/frontend/js/src/index.js'),
   },
   resolve: {
     alias: {
-      views: path.join(__dirname, 'examples/app/frontend/js/src/views'),
+      views: path.join(__dirname, 'demo/app/frontend/js/src/views'),
       components: path.join(
         __dirname,
-        'examples/app/frontend/js/src/components'
+        'demo/app/frontend/js/src/components'
       ),
       useForm: path.join(
         __dirname,
-        'examples/app/frontend/js/src/use-form.js'
+        'demo/app/frontend/js/src/use-form.js'
       ),
     }
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'examples/app/views/src/index.html'),
-      filename: path.join(__dirname, 'examples/app/views/dist/index.html'),
+      template: path.join(__dirname, 'demo/app/views/src/index.html'),
+      filename: path.join(__dirname, 'demo/app/views/dist/index.html'),
     })
   ],
   module: {
@@ -32,7 +32,7 @@ const common = {
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        include: path.join(__dirname, 'examples/app/frontend/js/src'),
+        include: path.join(__dirname, 'demo/app/frontend/js/src'),
       },
       {
         test: /\.css$/,
@@ -40,7 +40,7 @@ const common = {
           MiniCssExtractPlugin.loader,
           'css-loader'
         ],
-        include: path.join(__dirname, 'examples/app/frontend/js/src'),
+        include: path.join(__dirname, 'demo/app/frontend/js/src'),
       },
       {
         test: /\.svg$/,
