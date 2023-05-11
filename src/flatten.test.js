@@ -51,7 +51,7 @@ test('flatten - case 1', t => {
 
   const actual = flatten(fields);
   const expected = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'banana',
     'basics.fruit.error': null,
     'basics.fruit.exclude': false,
@@ -65,7 +65,7 @@ test('flatten - case 1', t => {
     'basics.fruit.disabled': false,
     'basics.fruit.snapshot': '',
 
-    'basics.recipients.0.person.firstName.allowEmpty': false,
+    'basics.recipients.0.person.firstName.includeEmpty': false,
     'basics.recipients.0.person.firstName.value': 'Joe',
     'basics.recipients.0.person.firstName.error': null,
     'basics.recipients.0.person.firstName.exclude': false,
@@ -79,7 +79,7 @@ test('flatten - case 1', t => {
     'basics.recipients.0.person.firstName.disabled': false,
     'basics.recipients.0.person.firstName.snapshot': '',
 
-    'basics.recipients.1.person.firstName.allowEmpty': false,
+    'basics.recipients.1.person.firstName.includeEmpty': false,
     'basics.recipients.1.person.firstName.value': 'Bill',
     'basics.recipients.1.person.firstName.error': null,
     'basics.recipients.1.person.firstName.exclude': false,
@@ -93,7 +93,7 @@ test('flatten - case 1', t => {
     'basics.recipients.1.person.firstName.disabled': false,
     'basics.recipients.1.person.firstName.snapshot': '',
 
-    'order.orderNumber.allowEmpty': false,
+    'order.orderNumber.includeEmpty': false,
     'order.orderNumber.value': '2453',
     'order.orderNumber.error': 'Something went wrong',
     'order.orderNumber.exclude': false,

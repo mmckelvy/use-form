@@ -50,10 +50,10 @@ export default function serializeForm({ _validatedFields }) {
     const excludeKey = [...pathToFieldName, 'exclude'].join('.');
     const shouldExclude = _validatedFields[excludeKey];
     
-    const allowEmptyKey = [...pathToFieldName, 'allowEmpty'].join('.');
-    const allowEmpty = _validatedFields[allowEmptyKey];
+    const includeEmptyKey = [...pathToFieldName, 'includeEmpty'].join('.');
+    const includeEmpty = _validatedFields[includeEmptyKey];
     
-    const isEmpty = typeof val === 'string' && !val.length && !allowEmpty;
+    const isEmpty = typeof val === 'string' && !val.length && !includeEmpty;
 
     // Because we're serializing the form, we only care about the
     // actual "value" field prop.

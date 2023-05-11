@@ -10,7 +10,7 @@ test('filterFields - Case 1', t => {
   ];
 
   const _fields = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'banana',
     'basics.fruit.error': null,
     'basics.fruit.exclude': false,
@@ -23,7 +23,7 @@ test('filterFields - Case 1', t => {
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
 
-    'order.orderNumber.allowEmpty': false,
+    'order.orderNumber.includeEmpty': false,
     'order.orderNumber.value': '2453',
     'order.orderNumber.error': 'Something went wrong',
     'order.orderNumber.exclude': false,
@@ -40,7 +40,7 @@ test('filterFields - Case 1', t => {
   };
 
   const expected = {
-    'order.orderNumber.allowEmpty': false,
+    'order.orderNumber.includeEmpty': false,
     'order.orderNumber.value': '2453',
     'order.orderNumber.error': 'Something went wrong',
     'order.orderNumber.exclude': false,
@@ -68,7 +68,7 @@ test('filterFields - Case 2', t => {
   ];
 
   const _fields = {
-    'basics.recipients.0.person.firstName.allowEmpty': false,
+    'basics.recipients.0.person.firstName.includeEmpty': false,
     'basics.recipients.0.person.firstName.value': 'Joe',
     'basics.recipients.0.person.firstName.error': null,
     'basics.recipients.0.person.firstName.exclude': false,
@@ -82,7 +82,7 @@ test('filterFields - Case 2', t => {
     'basics.recipients.0.person.firstName.disabled': false,
     'basics.recipients.0.person.firstName.snapshot': '',
 
-    'basics.recipients.1.person.firstName.allowEmpty': false,
+    'basics.recipients.1.person.firstName.includeEmpty': false,
     'basics.recipients.1.person.firstName.value': 'Bill',
     'basics.recipients.1.person.firstName.error': null,
     'basics.recipients.1.person.firstName.exclude': false,
@@ -98,7 +98,7 @@ test('filterFields - Case 2', t => {
   };
 
   const expected = {
-    'basics.recipients.0.person.firstName.allowEmpty': false,
+    'basics.recipients.0.person.firstName.includeEmpty': false,
     'basics.recipients.0.person.firstName.value': 'Joe',
     'basics.recipients.0.person.firstName.error': null,
     'basics.recipients.0.person.firstName.exclude': false,
@@ -126,7 +126,7 @@ test('filterFields - Case 3', t => {
   ];
 
   const _fields = {
-    'basics.recipients.0.person.firstName.allowEmpty': false,
+    'basics.recipients.0.person.firstName.includeEmpty': false,
     'basics.recipients.0.person.firstName.value': 'Joe',
     'basics.recipients.0.person.firstName.error': null,
     'basics.recipients.0.person.firstName.exclude': false,
@@ -140,7 +140,7 @@ test('filterFields - Case 3', t => {
     'basics.recipients.0.person.firstName.disabled': false,
     'basics.recipients.0.person.firstName.snapshot': '',
 
-    'basics.recipients.0.person.lastName.allowEmpty': false,
+    'basics.recipients.0.person.lastName.includeEmpty': false,
     'basics.recipients.0.person.lastName.value': 'Joe',
     'basics.recipients.0.person.lastName.error': null,
     'basics.recipients.0.person.lastName.exclude': false,
@@ -154,7 +154,7 @@ test('filterFields - Case 3', t => {
     'basics.recipients.0.person.lastName.disabled': false,
     'basics.recipients.0.person.lastName.snapshot': '',
 
-    'basics.recipients.1.person.firstName.allowEmpty': false,
+    'basics.recipients.1.person.firstName.includeEmpty': false,
     'basics.recipients.1.person.firstName.value': 'Bill',
     'basics.recipients.1.person.firstName.error': null,
     'basics.recipients.1.person.firstName.exclude': false,
@@ -168,7 +168,7 @@ test('filterFields - Case 3', t => {
     'basics.recipients.1.person.firstName.disabled': false,
     'basics.recipients.1.person.firstName.snapshot': '',
 
-    'basics.recipients.1.person.lastName.allowEmpty': false,
+    'basics.recipients.1.person.lastName.includeEmpty': false,
     'basics.recipients.1.person.lastName.value': 'Bill',
     'basics.recipients.1.person.lastName.error': null,
     'basics.recipients.1.person.lastName.exclude': false,
@@ -185,7 +185,7 @@ test('filterFields - Case 3', t => {
   };
 
   const expected = {
-    'basics.recipients.0.person.lastName.allowEmpty': false,
+    'basics.recipients.0.person.lastName.includeEmpty': false,
     'basics.recipients.0.person.lastName.value': 'Joe',
     'basics.recipients.0.person.lastName.error': null,
     'basics.recipients.0.person.lastName.exclude': false,
@@ -199,7 +199,7 @@ test('filterFields - Case 3', t => {
     'basics.recipients.0.person.lastName.disabled': false,
     'basics.recipients.0.person.lastName.snapshot': '',
 
-    'basics.recipients.1.person.lastName.allowEmpty': false,
+    'basics.recipients.1.person.lastName.includeEmpty': false,
     'basics.recipients.1.person.lastName.value': 'Bill',
     'basics.recipients.1.person.lastName.error': null,
     'basics.recipients.1.person.lastName.exclude': false,
@@ -222,7 +222,7 @@ test('filterFields - Case 3', t => {
 // No filter
 test('filterFields - Case 4', t => {
   const _fields = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'banana',
     'basics.fruit.error': null,
     'basics.fruit.exclude': false,
@@ -235,7 +235,7 @@ test('filterFields - Case 4', t => {
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
 
-    'order.orderNumber.allowEmpty': false,
+    'order.orderNumber.includeEmpty': false,
     'order.orderNumber.value': '2453',
     'order.orderNumber.error': 'Something went wrong',
     'order.orderNumber.exclude': false,
@@ -252,7 +252,7 @@ test('filterFields - Case 4', t => {
   };
 
   const expected = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'banana',
     'basics.fruit.error': null,
     'basics.fruit.exclude': false,
@@ -265,7 +265,7 @@ test('filterFields - Case 4', t => {
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
 
-    'order.orderNumber.allowEmpty': false,
+    'order.orderNumber.includeEmpty': false,
     'order.orderNumber.value': '2453',
     'order.orderNumber.error': 'Something went wrong',
     'order.orderNumber.exclude': false,

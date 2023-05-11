@@ -8,6 +8,7 @@
     "start:dev": "node ./test/app/server.js",
     "watch:dev": "webpack --config webpack.dev.js --watch --progress"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git@github.com:mmckelvy/use-form.git"

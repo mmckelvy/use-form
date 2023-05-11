@@ -70,8 +70,8 @@ export default function flatten(fields) {
           val.disabled = false;
         }
 
-        if (!val.hasOwnProperty('allowEmpty')) {
-          val.allowEmpty = false;
+        if (!val.hasOwnProperty('includeEmpty')) {
+          val.includeEmpty = false;
         }
 
         if (!val.hasOwnProperty('exclude')) {

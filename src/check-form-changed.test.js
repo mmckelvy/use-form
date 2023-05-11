@@ -4,7 +4,7 @@ import checkFormChanged from './check-form-changed.js';
 
 test('checkFormChanged - Case 1', t => {
   const _fields = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'banana',
     'basics.fruit.error': null,
     'basics.fruit.exclude': false,
@@ -17,7 +17,7 @@ test('checkFormChanged - Case 1', t => {
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
     
-    'basics.color.allowEmpty': false,
+    'basics.color.includeEmpty': false,
     'basics.color.value': 'yellow',
     'basics.color.error': null,
     'basics.color.exclude': false,
@@ -32,7 +32,7 @@ test('checkFormChanged - Case 1', t => {
   };
 
   const resetPoint = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'apple', // this changed
     'basics.fruit.error': null,
     'basics.fruit.exclude': false,
@@ -45,7 +45,7 @@ test('checkFormChanged - Case 1', t => {
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
     
-    'basics.color.allowEmpty': false,
+    'basics.color.includeEmpty': false,
     'basics.color.value': 'red', // this changed
     'basics.color.error': null,
     'basics.color.exclude': false,
@@ -67,7 +67,7 @@ test('checkFormChanged - Case 1', t => {
 
 test('checkFormChanged - Case 2', t => {
   const _fields = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'banana',
     'basics.fruit.error': null,
     'basics.fruit.exclude': false,
@@ -80,7 +80,7 @@ test('checkFormChanged - Case 2', t => {
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
     
-    'basics.color.allowEmpty': false,
+    'basics.color.includeEmpty': false,
     'basics.color.value': 'yellow',
     'basics.color.error': null,
     'basics.color.exclude': false,
@@ -95,7 +95,7 @@ test('checkFormChanged - Case 2', t => {
   };
 
   const resetPoint = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'banana', // this did not change
     'basics.fruit.error': null,
     'basics.fruit.exclude': false,
@@ -108,7 +108,7 @@ test('checkFormChanged - Case 2', t => {
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
     
-    'basics.color.allowEmpty': false,
+    'basics.color.includeEmpty': false,
     'basics.color.value': 'yellow', // this did not change
     'basics.color.error': 'Something went wrong', // this changed
     'basics.color.exclude': false,
@@ -130,7 +130,7 @@ test('checkFormChanged - Case 2', t => {
 
 test('checkFormChanged - Case 3', t => {
   const _fields = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'banana',
     'basics.fruit.checked': true,
     'basics.fruit.error': null,
@@ -144,7 +144,7 @@ test('checkFormChanged - Case 3', t => {
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
     
-    'basics.color.allowEmpty': false,
+    'basics.color.includeEmpty': false,
     'basics.color.value': 'yellow',
     'basics.color.error': null,
     'basics.color.exclude': false,
@@ -159,7 +159,7 @@ test('checkFormChanged - Case 3', t => {
   };
 
   const resetPoint = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'banana', // this did not change
     'basics.fruit.checked': false, // this changed
     'basics.fruit.error': null,
@@ -173,7 +173,7 @@ test('checkFormChanged - Case 3', t => {
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
     
-    'basics.color.allowEmpty': false,
+    'basics.color.includeEmpty': false,
     'basics.color.value': 'yellow', // this did not change
     'basics.color.error': 'Something went wrong', // this changed
     'basics.color.exclude': false,

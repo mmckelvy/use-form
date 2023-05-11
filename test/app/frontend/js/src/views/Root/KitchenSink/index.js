@@ -61,12 +61,13 @@ export default function KitchenSink() {
                 error: null
               };
 
-              return {
-                isValid: false,
-                value,
-                error: `${field.label} must be greater than 10`
-              };
             }
+
+            return {
+              isValid: false,
+              value,
+              error: `${field.label} must be greater than 10`
+            };
           }
         },
       }
@@ -100,8 +101,8 @@ export default function KitchenSink() {
       },
     },
     subscribeForUpdates: {
-      value: true,
-      type: 'boolean'
+      value: false,
+      type: 'boolean',
     },
     feedback: {
       value: '',
@@ -251,12 +252,13 @@ export default function KitchenSink() {
                         error: null
                       };
 
-                      return {
-                        isValid: false,
-                        value,
-                        error: `${field.label} must be greater than 10`
-                      };
                     }
+
+                    return {
+                      isValid: false,
+                      value,
+                      error: `${field.label} must be greater than 10`
+                    };
                   }
                 },
               }
@@ -371,6 +373,7 @@ export default function KitchenSink() {
           type="checkbox"
           name="subscribeForUpdates"
           value={fields.subscribeForUpdates.value}
+          checked={fields.subscribeForUpdates.value}
           onChange={handleChange}
         />
 

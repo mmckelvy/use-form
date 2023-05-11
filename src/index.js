@@ -17,7 +17,10 @@ function _handleChange(e, _setFields) {
   const key = [...parsePath(name), 'value'].join('.');
 
   _setFields((prevFields) => {
-    return {...prevFields, ...{[key]: val}};
+    return {
+      ...prevFields,
+      [key]: val
+    };
   });
 }
 

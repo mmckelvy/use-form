@@ -12,7 +12,6 @@ export default [
   'error',
   'isValid',
   'disabled',
-  'allowEmpty',
 
   // metadata
   'type',
@@ -28,5 +27,6 @@ export default [
 
   // serialize
   'serialize',
+  'includeEmpty',
   'exclude',
 ];
