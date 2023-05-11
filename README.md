@@ -2,11 +2,11 @@
 A lightweight, flexible hook for managing form state.
 
 ## Installation
-Not applicable, for now.
+```
+npm install --save @mmckelvy/use-form
+```
 
 ## Usage
-### Simple example
-
 ```javascript
 import { useForm } from 'utils';
 
@@ -51,105 +51,6 @@ export default function MyForm() {
 }
 ```
 
-### Complex example
-
-```javascript
-import { useForm } from 'utils';
-
-export default function MyForm() {
-  const {
-    fields,
-    setFields,
-    setField,
-    handleChange,
-    handleSubmit
-  } = useForm({
-    deviceName: {
-      value: '',
-      placeholder: 'Cold room sensor #1'
-    },
-    vendorDeviceId: {
-      value: '',
-      disabled: true,
-      placeholder: '515987'
-    },
-    heartbeat: {
-      type: 'number',
-      value: '',
-      label: 'Reading frequency (minutes)',
-      placeholder: 10,
-      validate: ({ value, field }) => {
-        if (Number.isInteger(value) && value >= 10) {
-          return {
-            isValid: true,
-            value,
-            error: null
-          };
-        }
-
-        return {
-          isValid: false,
-          value,
-          error: `${field.label} must be a number greater than 10`
-        };
-      }
-    },
-    upkeepCoreAssetId: {
-      value: '',
-      displayValue: '',
-      label: 'Asset',
-      required: false,
-      allowEmpty: true,
-      serialize: ({ value }) => {
-        if (!value) {
-          return null;
-        }
-
-        return value;
-      }
-    },
-  });
-
-  return (
-    <div>
-      {Object.entries(fields).map(( [ name, field ], i) => {
-        return (
-          <div key={i}>
-            <label>
-              {field.label}
-            <label>
-          
-            <input
-              name={name}
-              value={field.value}
-              onChange={handleChange}
-              disabled={field.disabled}
-              placeholder={field.placeholder}
-            />
-          </div>
-        );  
-      })}
-    
-      <button
-        type="button"
-        onClick={() => {
-          const { isValid, values } = handleSubmit();
-
-          if (isValid) {
-            // Persist the data however you wish
-            saveDataToServer(values);
-          } else {
-            console.log('Your input was invalid!');
-          }
-        }}
-      
-        Submit
-      </button>
-    </div>
-  );
-}
-
-```
 
 ### Description
 #### Overview

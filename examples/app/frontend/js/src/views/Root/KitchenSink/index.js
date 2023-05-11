@@ -145,6 +145,7 @@ export default function KitchenSink() {
 
         <input
           name="firstName"
+          placeholder={fields.firstName.placeholder}
           value={fields.firstName.value}
           onChange={handleChange}
         />
@@ -166,6 +167,7 @@ export default function KitchenSink() {
 
         <input
           name="lastName"
+          placeholder={fields.lastName.placeholder}
           value={fields.lastName.value}
           onChange={handleChange}
         />
@@ -201,6 +203,7 @@ export default function KitchenSink() {
 
                   <input
                     name={field.path}
+                    placeholder={field.placeholder}
                     value={field.value}
                     onChange={handleChange}
                   />
