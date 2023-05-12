@@ -28,6 +28,12 @@ export default function Root() {
         }}>
 
         <a href="/basic">Basic</a>
+        <a href="/with-arrays">With Arrays</a>
+        <a href="/with-selects">With Selects</a>
+        <a href="/wizard">Wizard</a>
+        <a href="/undo">Undo</a>
+        <a href="/reset-form">Reset Form</a>
+        <a href="/kitchen-sink">Kitchen Sink</a>
       </div>
 
 
