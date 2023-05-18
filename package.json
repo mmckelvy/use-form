@@ -4,7 +4,7 @@
   "description": "Simple, hooks based React form utility.",
   "main": "src/index.js",
   "scripts": {
-    "test": "ava",
+    "test:unit": "node ./test/unit-test-setup.js && ava && node ./test/unit-test-teardown.js",
     "start:dev": "node ./demo/app/server.js",
     "watch:dev": "webpack --config webpack.dev.js --watch --progress"
   },
@@ -27,11 +27,13 @@
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",
     "@svgr/webpack": "^7.0.0",
-    "ava": "^4.3.3",
+    "ava": "^5.2.0",
     "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
     "compression-webpack-plugin": "^10.0.0",
     "css-loader": "^6.7.3",
+    "eslint": "^8.40.0",
+    "eslint-plugin-react": "^7.32.2",
     "express": "^4.18.2",
     "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^2.7.5",

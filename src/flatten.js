@@ -33,52 +33,52 @@ export default function flatten(fields) {
         results[[...path, key].join('.')] = val;
 
       // we're still not to the leaf object
-      } else if (isObject(val) && !val.hasOwnProperty('value')) {
+      } else if (isObject(val) && !Object.hasOwn(val, 'value')) {
         walk(val, [...path, key], results);
 
       // Set defaults if necessary
       } else if (isObject(val)) {
-        if (!val.hasOwnProperty('error')) {
+        if (!Object.hasOwn(val, 'error')) {
           val.error = null;
         }
 
-        if (!val.hasOwnProperty('isValid')) {
+        if (!Object.hasOwn(val, 'isValid')) {
           val.isValid = true;
         }
 
-        if (!val.hasOwnProperty('type')) {
+        if (!Object.hasOwn(val, 'type')) {
           val.type = 'text';
         }
 
-        if (!val.hasOwnProperty('label')) {
+        if (!Object.hasOwn(val, 'label')) {
           val.label = properCase(key);
         }
 
-        if (!val.hasOwnProperty('required')) {
+        if (!Object.hasOwn(val, 'required')) {
           val.required = true;
         }
 
-        if (!val.hasOwnProperty('preValidate')) {
+        if (!Object.hasOwn(val, 'preValidate')) {
           val.preValidate = preValidate;
         }
 
-        if (!val.hasOwnProperty('validate')) {
+        if (!Object.hasOwn(val, 'validate')) {
           val.validate = validate;
         }
 
-        if (!val.hasOwnProperty('disabled')) {
+        if (!Object.hasOwn(val, 'disabled')) {
           val.disabled = false;
         }
 
-        if (!val.hasOwnProperty('includeEmpty')) {
+        if (!Object.hasOwn(val, 'includeEmpty')) {
           val.includeEmpty = false;
         }
 
-        if (!val.hasOwnProperty('exclude')) {
+        if (!Object.hasOwn(val, 'exclude')) {
           val.exclude = false;
         }
 
-        if (!val.hasOwnProperty('snapshot')) {
+        if (!Object.hasOwn(val, 'snapshot')) {
           val.snapshot = '';
         }
 
