@@ -4,12 +4,13 @@
   "description": "Simple, hooks based React form utility.",
   "main": "src/index.js",
   "scripts": {
-    "test:unit": "node ./test/unit-test-setup.js && ava && node ./test/unit-test-teardown.js",
+    "test:unit": "node ./test/run-unit-tests.js",
     "start:dev": "node ./demo/app/server.js",
     "watch:dev": "webpack --config webpack.dev.js --watch --progress",
     "lint:src": "eslint ./src/**",
     "lint:demo": "eslint ./demo/app/frontend/js/src/**"
   },
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "git@github.com:mmckelvy/use-form.git"
