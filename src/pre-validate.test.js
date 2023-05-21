@@ -6,10 +6,8 @@ import preValidate from './pre-validate.js';
 test('preValidate - Case 1', t => {
   const value = 'foo';
   const field = {
-    firstName: {
-      value: 'foo',
-      type: 'text'
-    }
+    value,
+    type: 'text'
   };
 
   const actual = preValidate({value, field});
@@ -22,10 +20,8 @@ test('preValidate - Case 1', t => {
 test('preValidate - Case 2', t => {
   const value = 'foo    ';
   const field = {
-    firstName: {
-      value: 'foo',
-      type: 'text'
-    }
+    value,
+    type: 'text'
   };
 
   const actual = preValidate({value, field});
@@ -36,16 +32,28 @@ test('preValidate - Case 2', t => {
 
 // Parse numbers
 test('preValidate - Case 3', t => {
-  const value = 'foo    ';
+  const value = '27';
   const field = {
-    firstName: {
-      value: '27',
-      type: 'number'
-    }
+    value,
+    type: 'number'
   };
 
   const actual = preValidate({value, field});
   const expected = 27;
+
+  t.is(actual, expected);
+});
+
+// Parse dates
+test('preValidate - Case 4', t => {
+  const value = new Date();
+  const field = {
+    value,
+    type: 'text'
+  };
+
+  const actual = preValidate({value, field});
+  const expected = value.toISOString();
 
   t.is(actual, expected);
 });
