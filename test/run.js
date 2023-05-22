@@ -8,7 +8,7 @@ module.exports = function run({ cmd, args = [], shell = 'zsh'} = {}) {
     const p = spawn(cmd, args, {
       cwd: process.cwd(),
       stdio: 'inherit',
-      shell: 'zsh'
+      shell
     });
     p.on('exit', code => {
       resolve(code);

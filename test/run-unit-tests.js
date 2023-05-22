@@ -31,7 +31,7 @@ const run = require('./run');
     );
 
   } catch (err) {
-    console.log(err);
+    console.log('Error setting up tests', err);
   }
 
 })();
