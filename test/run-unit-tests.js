@@ -23,7 +23,7 @@ const run = require('./run');
       console.log('Error running tests', err);
     }
 
-    pkg.type = 'commonjs';
+    delete pkg.type;
 
     await writeFile(
       path.join(process.cwd(), './package.json'),

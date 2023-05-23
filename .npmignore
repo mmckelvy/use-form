@@ -3,3 +3,4 @@ unit-test-config.js
 /demo
 webpack.*
 /test
+/cypress
