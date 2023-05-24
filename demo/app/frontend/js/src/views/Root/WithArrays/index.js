@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useForm from 'useForm';
 
@@ -16,6 +16,9 @@ export default function WithArrays() {
     ]
   });
 
+  const [ valuesDisplay, setValuesDisplay ] = useState({});
+  const [ fieldsDisplay, setFieldsDisplay ] = useState({});
+
   return (
     <div
       style={{
@@ -24,118 +27,154 @@ export default function WithArrays() {
         padding: '24px',
         display: 'grid',
         gridTemplateColumns: '1fr',
-        rowGap: '8px'
+        rowGap: '48px'
       }}>
 
-      {fields.recipients.map((r, i) => {
-        return (
-          <div
-            key={i}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              columnGap: '8px',
-            }}>
-
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr',
-                rowGap: '8px'
-              }}>
-
-              <label style={{fontSize: '12px'}}>
-                {r.email.label}
-              </label>
-
-              <input
-                name={`recipients[${i}].email`}
-                value={r.email.value}
-                onChange={handleChange}
-              />
-
-              <span style={{color: 'red'}}>{r.email.error}</span>
-
-            </div>
-
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr',
-                rowGap: '8px'
-              }}>
-
-              <label style={{fontSize: '12px'}}>
-                {r.location.label}
-              </label>
-
-              <input
-                name={`recipients[${i}].location`}
-                value={r.location.value}
-                onChange={handleChange}
-              />
-
-              <span style={{color: 'red'}}>{r.location.error}</span>
-
-            </div>
-
-          </div>
-        );
-      })}
-
+      {/* Form */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'max-content max-content',
-          justifyContent: 'space-between'
+          gridTemplateColumns: '1fr',
+          rowGap: '16px'
         }}>
 
-        <button
-          type="button"
-          disabled={fields.recipients.length < 2}
-          onClick={() => {
-            const r = fields.recipients.slice(0, fields.recipients.length - 1)
+        {fields.recipients.map((r, i) => {
+          return (
+            <div
+              key={i}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                columnGap: '8px',
+              }}>
 
-            replaceFields({
-              recipients: r
-            });
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr',
+                  rowGap: '8px'
+                }}>
+
+                <label style={{fontSize: '12px'}}>
+                  {r.email.label}
+                </label>
+
+                <input
+                  name={`recipients[${i}].email`}
+                  value={r.email.value}
+                  onChange={handleChange}
+                />
+
+                <span style={{color: 'red'}}>{r.email.error}</span>
+
+              </div>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr',
+                  rowGap: '8px'
+                }}>
+
+                <label style={{fontSize: '12px'}}>
+                  {r.location.label}
+                </label>
+
+                <input
+                  name={`recipients[${i}].location`}
+                  value={r.location.value}
+                  onChange={handleChange}
+                />
+
+                <span style={{color: 'red'}}>{r.location.error}</span>
+
+              </div>
+
+            </div>
+          );
+        })}
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'max-content max-content',
+            justifyContent: 'space-between'
           }}>
 
-          - Remove recipient
-        </button>
+          <button
+            type="button"
+            disabled={fields.recipients.length < 2}
+            onClick={() => {
+              const r = fields.recipients.slice(0, fields.recipients.length - 1)
 
-        <button
-          type="button"
-          onClick={() => {
-            replaceFields({
-              recipients: [
-                ...fields.recipients,
-                {
-                  email: {
-                    value: ''
-                  },
-                  location: {
-                    value: ''
+              replaceFields({
+                recipients: r
+              });
+            }}>
+
+            - Remove recipient
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              replaceFields({
+                recipients: [
+                  ...fields.recipients,
+                  {
+                    email: {
+                      value: ''
+                    },
+                    location: {
+                      value: ''
+                    }
                   }
-                }
-              ]
-            })
+                ]
+              })
+            }}>
+
+            + Add recipient
+          </button>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => {
+            const { isValid, values } = handleSubmit();
+            setValuesDisplay(values);
           }}>
 
-          + Add recipient
+          Submit
         </button>
       </div>
 
-      <button
-        type="button"
-        onClick={() => {
-          const { isValid, values } = handleSubmit();
+      {/* Serialized values */}
+      <div>
+        <span>Serialized Values:</span>
+        <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
+      </div>
 
-          console.log(values);
+      {/* Fields */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          rowGap: '16px'
         }}>
 
-        Submit
-      </button>
+        <button
+          type="button"
+          style={{width: '25%'}}
+          onClick={() => {
+            setFieldsDisplay(fields);
+          }}>
+
+          View Fields
+        </button>
+
+        <span>Fields:</span>
+        <pre>{JSON.stringify(fieldsDisplay, null, 2)}</pre>
+      </div>
 
     </div>
   );

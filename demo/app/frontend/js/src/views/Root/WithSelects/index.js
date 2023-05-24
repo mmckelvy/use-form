@@ -1,22 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useForm from 'useForm';
 
 export default function WithSelects() {
-  const { fields, setFields, handleSubmit } = useForm({
-    userIndex: {
-      value: 0,
-      exclude: true
-    },
-    userId: {
-      value: '',
-      type: 'number'
-    },
-    userName: {
-      value: ''
-    }
-  });
-
   const options = [
     {
       userId: 1,
@@ -32,6 +18,25 @@ export default function WithSelects() {
     },
   ];
 
+  const { fields, setFields, handleSubmit } = useForm({
+    userIndex: {
+      value: 0,
+      type: 'number',
+      exclude: true
+    },
+    userId: {
+      value: options[0].userId,
+      type: 'number'
+    },
+    userName: {
+      value: options[0].userName
+    }
+  });
+
+
+  const [ valuesDisplay, setValuesDisplay ] = useState({});
+  const [ fieldsDisplay, setFieldsDisplay ] = useState({});
+
   return (
     <div
       style={{
@@ -40,59 +45,96 @@ export default function WithSelects() {
         padding: '24px',
         display: 'grid',
         gridTemplateColumns: '1fr',
-        rowGap: '8px'
+        rowGap: '48px'
       }}>
 
+      {/* Form */}
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr',
-          rowGap: '8px'
+          rowGap: '16px'
         }}>
 
-        <label style={{fontSize: '12px'}}>
-          {fields.userName.label}
-        </label>
-
-        <select
-          value={fields.userIndex.value}
-          onChange={(e) => {
-            const index = e.target.value;
-
-            setFields([
-              {
-                path: 'userIndex.value',
-                value: index
-              },
-              {
-                path: 'userId.value',
-                value: options[index].userId
-              },
-              {
-                path: 'userName.value',
-                value: options[index].userName
-              },
-            ]);
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            rowGap: '8px'
           }}>
 
-          {options.map((o, i) => {
-            return <option key={i} value={i}>{o.userName}</option>;
-          })}
+          <label style={{fontSize: '12px'}}>
+            {fields.userName.label}
+          </label>
 
-        </select>
+          <select
+            value={fields.userIndex.value}
+            onChange={(e) => {
+              const index = e.target.value;
 
+              setFields([
+                {
+                  path: 'userIndex.value',
+                  value: index
+                },
+                {
+                  path: 'userId.value',
+                  value: options[index].userId
+                },
+                {
+                  path: 'userName.value',
+                  value: options[index].userName
+                },
+              ]);
+            }}>
+
+            {options.map((o, i) => {
+              return <option key={i} value={i}>{o.userName}</option>;
+            })}
+
+          </select>
+
+        </div>
+
+        <button
+          type="button"
+          style={{width: '25%'}}
+          onClick={() => {
+            const { isValid, values } = handleSubmit();
+            setValuesDisplay(values);
+          }}>
+
+          Submit
+        </button>
       </div>
 
-      <button
-        type="button"
-        onClick={() => {
-          const { isValid, values } = handleSubmit();
+      {/* Serialized values */}
+      <div>
+        <span>Serialized Values:</span>
+        <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
+      </div>
 
-          console.log(values);
+      {/* Fields */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          rowGap: '16px'
         }}>
 
-        Submit
-      </button>
+        <button
+          type="button"
+          style={{width: '25%'}}
+          onClick={() => {
+            setFieldsDisplay(fields);
+          }}>
+
+          View Fields
+        </button>
+
+        <span>Fields:</span>
+        <pre>{JSON.stringify(fieldsDisplay, null, 2)}</pre>
+      </div>
 
     </div>
   );

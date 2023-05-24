@@ -94,9 +94,9 @@ export default function Basic() {
 
         <button
           type="button"
+          style={{width: '25%'}}
           onClick={() => {
             const { isValid, values } = handleSubmit();
-
             setValuesDisplay(values);
           }}>
 
@@ -105,32 +105,33 @@ export default function Basic() {
       </div>
 
 
-    {/* Serialized Values */}
-    <div>
-      <span>Serialized Values:</span>
-      <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
-    </div>
+      {/* Serialized Values */}
+      <div>
+        <span>Serialized Values:</span>
+        <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
+      </div>
 
-    {/* Fields */}
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr',
-        rowGap: '16px'
-      }}>
-
-      <button
-        type="button"
-        onClick={() => {
-          setFieldsDisplay(fields);
+      {/* Fields */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          rowGap: '16px'
         }}>
 
-        View Updated Fields
-      </button>
+        <button
+          type="button"
+          style={{width: '25%'}}
+          onClick={() => {
+            setFieldsDisplay(fields);
+          }}>
 
-      <span>Fields:</span>
-      <pre>{JSON.stringify(fieldsDisplay, null, 2)}</pre>
-    </div>
+          View Fields
+        </button>
+
+        <span>Fields:</span>
+        <pre>{JSON.stringify(fieldsDisplay, null, 2)}</pre>
+      </div>
 
     </div>
   );
