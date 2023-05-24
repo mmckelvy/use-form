@@ -97,13 +97,7 @@ export default function Basic() {
           onClick={() => {
             const { isValid, values } = handleSubmit();
 
-            if (isValid) {
-              setValuesDisplay(values);
-            }
-
-            setFieldsDisplay(fields);
-
-            console.log(values);
+            setValuesDisplay(values);
           }}>
 
           Submit
@@ -118,7 +112,22 @@ export default function Basic() {
     </div>
 
     {/* Fields */}
-    <div>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        rowGap: '16px'
+      }}>
+
+      <button
+        type="button"
+        onClick={() => {
+          setFieldsDisplay(fields);
+        }}>
+
+        View Updated Fields
+      </button>
+
       <span>Fields:</span>
       <pre>{JSON.stringify(fieldsDisplay, null, 2)}</pre>
     </div>
