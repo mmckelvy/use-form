@@ -468,6 +468,7 @@ export default function KitchenSink() {
           type="button"
           style={{width: '25%'}}
           onClick={() => {
+            console.log(fields);
             setFieldsDisplay(fields);
           }}>
 

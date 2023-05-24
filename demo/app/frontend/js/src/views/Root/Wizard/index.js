@@ -85,6 +85,7 @@ export default function Wizard() {
 
       {page === 4 &&
         <SubmitPage
+          fields={fields}
           handleSubmit={handleSubmit}
         />
       }

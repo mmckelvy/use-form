@@ -166,6 +166,7 @@ export default function WithArrays() {
           type="button"
           style={{width: '25%'}}
           onClick={() => {
+            console.log(fields);
             setFieldsDisplay(fields);
           }}>
 

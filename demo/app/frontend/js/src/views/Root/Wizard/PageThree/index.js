@@ -71,7 +71,7 @@ export default function PageThree({
         <button
           type="button"
           onClick={() =>{
-            setPage(3);
+            setPage(2);
           }}>
 
           Back

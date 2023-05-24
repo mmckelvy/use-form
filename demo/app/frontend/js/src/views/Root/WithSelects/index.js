@@ -126,6 +126,7 @@ export default function WithSelects() {
           type="button"
           style={{width: '25%'}}
           onClick={() => {
+            console.log(fields);
             setFieldsDisplay(fields);
           }}>
 

@@ -16,7 +16,7 @@ export default function PageOne({
         padding: '24px',
         display: 'grid',
         gridTemplateColumns: '1fr',
-        rowGap: '8px'
+        rowGap: '16px'
       }}>
 
       <div

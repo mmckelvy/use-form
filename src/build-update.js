@@ -7,7 +7,7 @@ export default function buildUpdate(update) {
   const u = {};
 
   for (const { path, value } of update) {
-    if (!path || !value) {
+    if (path == null || value == null) {
       throw new Error(`'path' and 'value' are required.`);
     }
 

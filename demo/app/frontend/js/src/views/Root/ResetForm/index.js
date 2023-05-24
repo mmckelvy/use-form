@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useForm from 'useForm';
 
@@ -17,6 +17,9 @@ export default function Basic() {
     }
   });
 
+  const [ valuesDisplay, setValuesDisplay ] = useState({});
+  const [ fieldsDisplay, setFieldsDisplay ] = useState({});
+
   return (
     <div
       style={{
@@ -25,75 +28,108 @@ export default function Basic() {
         padding: '24px',
         display: 'grid',
         gridTemplateColumns: '1fr',
-        rowGap: '8px'
+        rowGap: '48px'
       }}>
 
+      {/* Form */}
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr',
-          rowGap: '8px'
+          rowGap: '16px'
         }}>
 
-        <label style={{fontSize: '12px'}}>
-          {fields.firstName.label}
-        </label>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            rowGap: '8px'
+          }}>
 
-        <input
-          name="firstName"
-          value={fields.firstName.value}
-          onChange={handleChange}
-        />
+          <label style={{fontSize: '12px'}}>
+            {fields.firstName.label}
+          </label>
 
-        <span style={{color: 'red'}}>{fields.firstName.error}</span>
+          <input
+            name="firstName"
+            value={fields.firstName.value}
+            onChange={handleChange}
+          />
+
+          <span style={{color: 'red'}}>{fields.firstName.error}</span>
+
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            rowGap: '8px'
+          }}>
+
+          <label style={{fontSize: '12px'}}>
+            {fields.lastName.label}
+          </label>
+
+          <input
+            name="lastName"
+            value={fields.lastName.value}
+            onChange={handleChange}
+          />
+
+          <span style={{color: 'red'}}>{fields.lastName.error}</span>
+
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'max-content max-content',
+            justifyContent: 'space-between'
+          }}>
+
+          <button
+            type="button"
+            onClick={() => {
+              setResetPoint();
+            }}>
+
+            Set Reset Point
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              reset();
+            }}>
+
+            Reset
+          </button>
+        </div>
 
       </div>
 
+      {/* Fields */}
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr',
-          rowGap: '8px'
-        }}>
-
-        <label style={{fontSize: '12px'}}>
-          {fields.lastName.label}
-        </label>
-
-        <input
-          name="lastName"
-          value={fields.lastName.value}
-          onChange={handleChange}
-        />
-
-        <span style={{color: 'red'}}>{fields.lastName.error}</span>
-
-      </div>
-
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'max-content max-content',
-          justifyContent: 'space-between'
+          rowGap: '16px'
         }}>
 
         <button
           type="button"
+          style={{width: '25%'}}
           onClick={() => {
-            setResetPoint();
+            console.log(fields);
+            setFieldsDisplay(fields);
           }}>
 
-          Set Reset Point
+          View Fields
         </button>
 
-        <button
-          type="button"
-          onClick={() => {
-            reset();
-          }}>
-
-          Reset
-        </button>
+        <span>Fields:</span>
+        <pre>{JSON.stringify(fieldsDisplay, null, 2)}</pre>
       </div>
 
     </div>
