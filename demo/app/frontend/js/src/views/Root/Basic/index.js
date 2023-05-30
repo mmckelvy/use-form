@@ -53,6 +53,7 @@ export default function Basic() {
           />
 
           <span
+            data-cy="firstNameError"
             style={{
               color: 'red',
               fontSize: '12px'

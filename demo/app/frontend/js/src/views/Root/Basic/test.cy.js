@@ -24,4 +24,23 @@ describe('<Basic />', () => {
       expect(actual).to.deep.eq(expected);
     });
   });
+
+  it('flags an invalid form', () => {
+    cy.mount(<Basic />);
+
+    cy.get('[data-cy=lastNameInput')
+      .type('Smith')
+    ;
+
+    cy.get('[data-cy=submit')
+      .click()
+    ;
+
+    cy.get('[data-cy=firstNameError').should((x) => {
+      const actual = x.text();
+      const expected = 'First name is required';
+
+      expect(actual).to.eq(expected);
+    });
+  });
 });
