@@ -95,6 +95,7 @@ export default function Basic() {
         <button
           type="button"
           style={{width: '25%'}}
+          data-cy="submit"
           onClick={() => {
             const { isValid, values } = handleSubmit();
             setValuesDisplay(values);
@@ -108,7 +109,11 @@ export default function Basic() {
       {/* Serialized Values */}
       <div>
         <span>Serialized Values:</span>
-        <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
+        <pre
+          data-cy="results">
+
+          {JSON.stringify(valuesDisplay, null, 2)}
+        </pre>
       </div>
 
       {/* Fields */}

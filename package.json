@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test:unit": "node ./test/run-unit-tests.js",
+    "test:component": "./node_modules/.bin/cypress run --headed",
     "start:dev": "node ./demo/app/server.js",
     "watch:dev": "webpack --config webpack.dev.js --watch --progress",
     "lint:src": "eslint ./src/**",
