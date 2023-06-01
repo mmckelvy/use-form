@@ -47,6 +47,7 @@ export default function Undo() {
 
           <input
             name="firstName"
+            data-cy="firstNameInput"
             value={fields.firstName.value}
             onChange={handleChange}
           />
@@ -68,6 +69,7 @@ export default function Undo() {
 
           <input
             name="lastName"
+            data-cy="lastNameInput"
             value={fields.lastName.value}
             onChange={handleChange}
           />
@@ -85,6 +87,7 @@ export default function Undo() {
 
           <button
             type="button"
+            data-cy="snapshot"
             onClick={() => {
               setFields([
                 {
@@ -103,6 +106,7 @@ export default function Undo() {
 
           <button
             type="button"
+            data-cy="undo"
             onClick={() => {
               setFields([
                 {
@@ -132,6 +136,7 @@ export default function Undo() {
 
         <button
           type="button"
+          data-cy="viewFields"
           style={{width: '25%'}}
           onClick={() => {
             console.log(fields);
@@ -142,7 +147,11 @@ export default function Undo() {
         </button>
 
         <span>Fields:</span>
-        <pre>{JSON.stringify(fieldsDisplay, null, 2)}</pre>
+        <pre
+          data-cy="fields">
+
+          {JSON.stringify(fieldsDisplay, null, 2)}
+        </pre>
       </div>
 
 

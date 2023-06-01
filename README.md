@@ -16,18 +16,18 @@ export default function MyForm() {
     handleChange,
     handleSubmit
   } = useForm({
-    deviceName: {
+    firstName: {
       value: '',
-      placeholder: 'Cold room sensor #1'
+      placeholder: 'John'
     }
   )};
 
   return (
     <div>
       <input
-        name="deviceName"
-        value={fields.deviceName.value}
-        placeholder={fields.device.placeholder}
+        name="firstName"
+        value={fields.firstName.value}
+        placeholder={fields.firstName.placeholder}
         onChange={handleChange}
       />
     

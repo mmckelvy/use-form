@@ -103,9 +103,11 @@ export default function WithArrays() {
 
           <button
             type="button"
+            data-cy="removeRecipient"
             disabled={fields.recipients.length < 2}
             onClick={() => {
-              const r = fields.recipients.slice(0, fields.recipients.length - 1)
+              const r = fields.recipients
+                .slice(0, fields.recipients.length - 1)
 
               replaceFields({
                 recipients: r
@@ -117,6 +119,7 @@ export default function WithArrays() {
 
           <button
             type="button"
+            data-cy="addRecipient"
             onClick={() => {
               replaceFields({
                 recipients: [
@@ -164,6 +167,7 @@ export default function WithArrays() {
 
         <button
           type="button"
+          data-cy="viewFields"
           style={{width: '25%'}}
           onClick={() => {
             console.log(fields);
@@ -174,7 +178,11 @@ export default function WithArrays() {
         </button>
 
         <span>Fields:</span>
-        <pre>{JSON.stringify(fieldsDisplay, null, 2)}</pre>
+        <pre
+          data-cy="fieldsDisplay">
+
+          {JSON.stringify(fieldsDisplay, null, 2)}
+        </pre>
       </div>
 
     </div>

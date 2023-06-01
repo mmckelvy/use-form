@@ -33,7 +33,6 @@ export default function WithSelects() {
     }
   });
 
-
   const [ valuesDisplay, setValuesDisplay ] = useState({});
   const [ fieldsDisplay, setFieldsDisplay ] = useState({});
 
@@ -69,6 +68,7 @@ export default function WithSelects() {
 
           <select
             value={fields.userIndex.value}
+            data-cy="userName"
             onChange={(e) => {
               const index = e.target.value;
 
@@ -98,6 +98,7 @@ export default function WithSelects() {
 
         <button
           type="button"
+          data-cy="submit"
           style={{width: '25%'}}
           onClick={() => {
             const { isValid, values } = handleSubmit();
@@ -111,7 +112,11 @@ export default function WithSelects() {
       {/* Serialized values */}
       <div>
         <span>Serialized Values:</span>
-        <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
+        <pre
+          data-cy="results">
+
+          {JSON.stringify(valuesDisplay, null, 2)}
+        </pre>
       </div>
 
       {/* Fields */}
