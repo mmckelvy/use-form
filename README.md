@@ -99,65 +99,36 @@ The general `useForm` lifecycle is:
 #### Field properties
 `useForm` takes an `initialFields` object.  Top level keys in the `initialFields` object correspond to the input `name` property.  Keys in the leaf object correspond to actual field properties, which include input values, metadata, validation, and other state data.  The full list of field properties, with their default values is as follows:
 
-[set defaults for ALL properties]
-
 ```javascript
   // values
   'value', // default empty string
-  'displayValue', // default undefined
-  'checked', // default undefined
-  'snapshot',
+  'displayValue', // default null
+  'checked', // default null
+  'snapshot', // default empty string
 
   // state data
-  'error',
-  'isValid',
-  'disabled',
+  'error', // default null
+  'isValid', // default true
+  'disabled', // default false
 
   // metadata
-  'type',
-  'label',
-  'placeholder',
-  'order',
+  'type', // can be 'number', 'text', 'boolean', or 'multiLine'. Default 'text'.
+  'label', // default proper case for the field name.
+  'placeholder', // default null
+  'order', // default null
 
   // navigation
-  'path',
+  'path', // set automatically.  The field's path.
 
   // validation
-  'required',
-  'preValidate',
+  'required', // default true
+  'preValidate', // default
   'validate',
 
   // serialize
   'serialize',
   'includeEmpty',
-  'exclude',
-
-
-
-
-
-  // state data
-  'value',
-  'displayValue', // default null
-  'checked', // default undefined
-  'error', // default null
-  'isValid', // default true
-  'disabled', // default false
-  'allowEmpty', // default false
-
-  // metadata
-  'type', // default text
-  'label', // default proper case of the immediate parent key
-  'placeholder', // default undefined
-
-  // validation
-  'required', // default true
-  'preValidate', // see ./pre-validate.js for default preValidate function
-  'validate', // see ./validate.js for default validate function
-
-  // serialize
-  'serialize' // default undefined
-];
+  'exclude'
 ```
 
 Fields can have nested or array structures: 

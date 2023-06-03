@@ -67,6 +67,8 @@ test('flatten - case 1', t => {
     'basics.fruit.displayValue': null,
     'basics.fruit.snapshot': '',
     'basics.fruit.serialize': serialize,
+    'basics.fruit.placeholder': null,
+    'basics.fruit.order': null,
 
     'basics.recipients.0.person.firstName.includeEmpty': false,
     'basics.recipients.0.person.firstName.value': 'Joe',
@@ -83,6 +85,8 @@ test('flatten - case 1', t => {
     'basics.recipients.0.person.firstName.snapshot': '',
     'basics.recipients.0.person.firstName.displayValue': null,
     'basics.recipients.0.person.firstName.serialize': serialize,
+    'basics.recipients.0.person.firstName.placeholder': null,
+    'basics.recipients.0.person.firstName.order': null,
 
     'basics.recipients.1.person.firstName.includeEmpty': false,
     'basics.recipients.1.person.firstName.value': 'Bill',
@@ -99,6 +103,8 @@ test('flatten - case 1', t => {
     'basics.recipients.1.person.firstName.snapshot': '',
     'basics.recipients.1.person.firstName.displayValue': null,
     'basics.recipients.1.person.firstName.serialize': serialize,
+    'basics.recipients.1.person.firstName.placeholder': null,
+    'basics.recipients.1.person.firstName.order': null,
 
     'order.orderNumber.includeEmpty': false,
     'order.orderNumber.value': '2453',
@@ -115,6 +121,8 @@ test('flatten - case 1', t => {
     'order.orderNumber.snapshot': '',
     'order.orderNumber.displayValue': null,
     'order.orderNumber.serialize': serialize,
+    'order.orderNumber.placeholder': null,
+    'order.orderNumber.order': null,
 
     'products': null
   };

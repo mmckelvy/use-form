@@ -74,8 +74,12 @@ export default function flatten(fields) {
           val.label = properCase(key);
         }
 
-        if (!Object.hasOwn(val, 'label')) {
-          val.label = properCase(key);
+        if (!Object.hasOwn(val, 'placeholder')) {
+          val.placeholder = null;
+        }
+
+        if (!Object.hasOwn(val, 'order')) {
+          val.order = null;
         }
 
         // navigation
