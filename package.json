@@ -5,12 +5,11 @@
   "main": "src/index.js",
   "scripts": {
     "test:unit": "node ./test/run-unit-tests.js",
-    "test:component": "./node_modules/.bin/cypress run --headed",
+    "test:component": "./node_modules/.bin/cypress run --component",
     "start:dev": "node ./demo/app/server.js",
     "watch:dev": "webpack --config webpack.dev.js --watch --progress",
     "lint:src": "eslint ./src/**",
-    "lint:demo": "eslint ./demo/app/frontend/js/src/**",
-    "test:component": "cypress run --config video=false --component"
+    "lint:demo": "eslint ./demo/app/frontend/js/src/**"
   },
   "repository": {
     "type": "git",

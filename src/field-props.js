@@ -17,8 +17,10 @@ export default [
   'type',
   'label',
   'placeholder',
-  'path',
   'order',
+
+  // navigation
+  'path',
 
   // validation
   'required',

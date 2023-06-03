@@ -1,14 +1,18 @@
 # useForm
 A lightweight, flexible hook for managing form state.
 
+
 ## Installation
 ```
 npm install --save @mmckelvy/use-form
 ```
 
+
 ## Usage
-```javascript
-import { useForm } from 'utils';
+```jsx
+import { useForm } from '@mmckelvy/use-form';
+
+import saveDataToServer from './path-to-persistence-library';
 
 export default function MyForm() {
   const {
@@ -18,12 +22,14 @@ export default function MyForm() {
   } = useForm({
     firstName: {
       value: '',
-      placeholder: 'John'
+      placeholder: 'Enter your first name'
     }
   )};
 
   return (
     <div>
+      <label>{fields.firstName.label}</label>
+
       <input
         name="firstName"
         value={fields.firstName.value}
@@ -31,18 +37,21 @@ export default function MyForm() {
         onChange={handleChange}
       />
     
+      <span>{fields.firstName.error}</span>
+
       <button
         type="button"
         onClick={() => {
           const { isValid, values } = handleSubmit();
 
+          console.log(values); // {firstName: 'John'}
+
           if (isValid) {
-            // However you persist data to the server.
             saveDataToServer(values);
           } else {
             console.log('There was a problem with your inputs');
           }
-        }>
+        }}>
         
         Submit
       </button>
@@ -52,31 +61,81 @@ export default function MyForm() {
 ```
 
 
+## Demo and examples
+In one terminal tab run:
+
+```
+npm run start:dev
+```
+
+In another terminal tab run:
+
+```
+npm run watch:dev
+```
+
+Code for each example in the demo is located [here](./demo/app/frontend/js/src/views/Root).
 
 
-Code for the examples is located in the [Examples](./examples/app/frontend/js/src/views/Examples) folder.
-
-### Description
+## Description
 #### Overview
-Call the `useForm` hook and pass it an `initialFields` object.  `useForm` will return:
+Call the `useForm` hook and pass it an `initialFields` object.  `useForm` will return an object with the following properties:
 
 * A `fields` object with your `initialFields` updated with the latest state changes.
 * A `handleChange` function you can pass to your inputs' `onChange` handlers.
 * A `handleSubmit` function that will pre-validate, validate, and serialize your form.
-* A `setField` function that will set the value for an individual field.
-* A `setFields` function that will replace multiple fields with new fields.
-* A `reset` function that will reset the fields to their initial state.
+* A `setFields` function that will set multiple field properties to values you specify.
+* A `replaceFields` function that will replace multiple field properties with new fields.
+* A `setResetPoint` function that will save the current state of the form for subsequent `resets`.
+* A `reset` function that will reset the fields to their initial state or a reset point specified by `setResetPoint`.
+* A `hasChanged` boolean value that indicates if any property in the form has changed.
 
 The general `useForm` lifecycle is:
 1. Call `useForm` with your `initialFields`.
 2. Use the returned `fields` object and `handleChange` to update the fields in response to user input.
-3. Use `setField`, `setFields`, and `reset` to handle edge cases, add / remove inputs, and reset fields.
+3. Use `setFields` when you need to update `selects`, custom elements, or you just need more control over field updates than what the `handleChange` function provides.
 4. Call `handleSubmit` when the user submits the form.  `handleSubmit` will pre-validate all fields (remove extra space, parse numbers), validate all fields, and then serialize all fields (prepare the fields for submission to the server).  
 
 #### Field properties
 `useForm` takes an `initialFields` object.  Top level keys in the `initialFields` object correspond to the input `name` property.  Keys in the leaf object correspond to actual field properties, which include input values, metadata, validation, and other state data.  The full list of field properties, with their default values is as follows:
 
+[set defaults for ALL properties]
+
 ```javascript
+  // values
+  'value', // default empty string
+  'displayValue', // default undefined
+  'checked', // default undefined
+  'snapshot',
+
+  // state data
+  'error',
+  'isValid',
+  'disabled',
+
+  // metadata
+  'type',
+  'label',
+  'placeholder',
+  'order',
+
+  // navigation
+  'path',
+
+  // validation
+  'required',
+  'preValidate',
+  'validate',
+
+  // serialize
+  'serialize',
+  'includeEmpty',
+  'exclude',
+
+
+
+
+
   // state data
   'value',
   'displayValue', // default null

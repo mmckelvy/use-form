@@ -52,6 +52,12 @@ export default function useForm(initialFields = {}) {
 
   return {
     fields: structure(_fields),
+    handleChange: (e) => {
+      _handleChange(e, _setFields);
+    },
+    handleSubmit: ({ fields } = {}) => {
+      return _handleSubmit({_fields, _setFields, fields});
+    },
     setFields: (update) => {
       _setFields((prevFields) => {
         return {
@@ -78,6 +84,16 @@ export default function useForm(initialFields = {}) {
         _setResetPoint({...updatedFields, ...flatten(fields)});
       }
     },
+    setResetPoint: (fields) => {
+      if (fields) {
+        _setResetPoint(flatten(fields));
+      }
+      _setResetPoint(_fields);
+    },
+    reset: () => {
+      _setFields(resetPoint);
+    },
+    hasChanged: checkFormChanged({_fields, resetPoint}),
     setField: (path, value) => {
       _setField(path, value, _setFields);
     },
@@ -85,21 +101,5 @@ export default function useForm(initialFields = {}) {
       const f = _removeField(path, _fields);
       _setFields(f);
     },
-    handleChange: (e) => {
-      _handleChange(e, _setFields);
-    },
-    handleSubmit: ({ fields } = {}) => {
-      return _handleSubmit({_fields, _setFields, fields});
-    },
-    reset: () => {
-      _setFields(resetPoint);
-    },
-    hasChanged: checkFormChanged({_fields, resetPoint}),
-    setResetPoint: (fields) => {
-      if (fields) {
-        _setResetPoint(flatten(fields));
-      }
-      _setResetPoint(_fields);
-    }
   };
 };

@@ -397,7 +397,11 @@ export default function KitchenSink() {
             {fields.subscribeForUpdates.label}
           </label>
 
-          <span style={{color: 'red'}}>{fields.subscribeForUpdates.error}</span>
+          <span
+            style={{color: 'red'}}>
+
+            {fields.subscribeForUpdates.error}
+          </span>
 
         </div>
 
