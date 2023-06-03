@@ -100,8 +100,53 @@ The general `useForm` lifecycle is:
 `useForm` takes an `initialFields` object.  Top level keys in the `initialFields` object correspond to the input `name` property.  Keys in the leaf object correspond to actual field properties, which include input values, metadata, validation, and other state data.  The full list of field properties, with their default values is as follows:
 
 ```javascript
-  // values
-  'value', // default empty string
+  value
+```
+
+Required.
+The actual field value.
+String, number, JS date object, or a boolean.
+Default: empty string.
+
+```javascript
+  displayValue
+```
+
+Optional.
+A human friendly alternative display value.
+String, number, JS date object, or a boolean.
+Default: null.
+
+```javascript
+  checked
+```
+
+Optional.
+The checked property for use with checkboxes if desired.
+Boolean.
+Default: null
+
+
+```javascript
+  snapshot
+```
+
+Optional.
+A snapshot of the `value` property. Useful for undos.
+String, number, JS date object, or a boolean.
+Default: empty string
+
+```javascript
+  error
+```
+
+[Pick up here]
+
+  */
+
+  /*
+
+  */
   'displayValue', // default null
   'checked', // default null
   'snapshot', // default empty string
