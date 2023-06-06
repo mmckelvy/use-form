@@ -13,7 +13,7 @@ npm install --save @mmckelvy/use-form
 
 ## Usage
 ```jsx
-import { useForm } from '@mmckelvy/use-form';
+import useForm from '@mmckelvy/use-form';
 
 import saveDataToServer from './path-to-persistence-library';
 
