@@ -3,6 +3,7 @@ import properCase from '@mmckelvy/case/src/proper-case.js';
 import isObject from './is-object.js';
 import preValidate from './pre-validate.js';
 import validate from './validate.js';
+import serialize from './serialize.js';
 import fieldProps from './field-props.js';
 
 /*
@@ -33,53 +34,84 @@ export default function flatten(fields) {
         results[[...path, key].join('.')] = val;
 
       // we're still not to the leaf object
-      } else if (isObject(val) && !val.hasOwnProperty('value')) {
+      } else if (isObject(val) && !Object.hasOwn(val, 'value')) {
         walk(val, [...path, key], results);
 
       // Set defaults if necessary
       } else if (isObject(val)) {
-        if (!val.hasOwnProperty('error')) {
+        // values
+        if (!Object.hasOwn(val, 'displayValue')) {
+          val.displayValue = null;
+        }
+
+        if (!Object.hasOwn(val, 'checked')) {
+          val.displayValue = null;
+        }
+
+        if (!Object.hasOwn(val, 'snapshot')) {
+          val.snapshot = '';
+        }
+
+        // state data
+        if (!Object.hasOwn(val, 'error')) {
           val.error = null;
         }
 
-        if (!val.hasOwnProperty('isValid')) {
+        if (!Object.hasOwn(val, 'isValid')) {
           val.isValid = true;
         }
 
-        if (!val.hasOwnProperty('type')) {
-          val.type = 'text';
-        }
-
-        if (!val.hasOwnProperty('label')) {
-          val.label = properCase(key);
-        }
-
-        if (!val.hasOwnProperty('required')) {
-          val.required = true;
-        }
-
-        if (!val.hasOwnProperty('preValidate')) {
-          val.preValidate = preValidate;
-        }
-
-        if (!val.hasOwnProperty('validate')) {
-          val.validate = validate;
-        }
-
-        if (!val.hasOwnProperty('disabled')) {
+        if (!Object.hasOwn(val, 'disabled')) {
           val.disabled = false;
         }
 
-        if (!val.hasOwnProperty('allowEmpty')) {
-          val.allowEmpty = false;
+        // metadata
+        if (!Object.hasOwn(val, 'type')) {
+          val.type = 'text';
         }
 
-        if (!val.hasOwnProperty('exclude')) {
+        if (!Object.hasOwn(val, 'label')) {
+          val.label = properCase(key);
+        }
+
+        if (!Object.hasOwn(val, 'placeholder')) {
+          val.placeholder = null;
+        }
+
+        if (!Object.hasOwn(val, 'order')) {
+          val.order = null;
+        }
+
+        // navigation
+        // Note that this is not conditional.  It is
+        // applied automatically.
+        val.path = [...path, key].join('.');
+
+        // validation
+        if (!Object.hasOwn(val, 'required')) {
+          val.required = true;
+        }
+
+        if (!Object.hasOwn(val, 'preValidate')) {
+          val.preValidate = preValidate;
+        }
+
+        if (!Object.hasOwn(val, 'validate')) {
+          val.validate = validate;
+        }
+
+        // serialization
+        if (!Object.hasOwn(val, 'serialize')) {
+          val.serialize = serialize;
+        }
+
+        if (!Object.hasOwn(val, 'includeEmpty')) {
+          val.includeEmpty = false;
+        }
+
+        if (!Object.hasOwn(val, 'exclude')) {
           val.exclude = false;
         }
-
-        // Add the path for convenience.
-        val.path = [...path, key].join('.');
 
         walk(val, [...path, key], results);
 

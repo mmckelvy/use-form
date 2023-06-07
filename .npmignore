@@ -1,2 +1,8 @@
 *.test.js
 unit-test-config.js
+test/
+cypress/
+cypress.config.js
+demo/
+webpack.*
+.eslintrc.js

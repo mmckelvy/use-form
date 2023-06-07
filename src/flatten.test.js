@@ -1,6 +1,7 @@
 import test from 'ava';
 
 import flatten from './flatten.js';
+import serialize from './serialize.js';
 
 test('flatten - case 1', t => {
   const fields = {
@@ -9,7 +10,7 @@ test('flatten - case 1', t => {
         value: 'banana',
         label: 'Fruit',
         preValidate: false,
-        validate: false
+        validate: false,
       },
       recipients: [
         {
@@ -18,7 +19,7 @@ test('flatten - case 1', t => {
               value: 'Joe',
               label: 'First name',
               preValidate: false,
-              validate: false
+              validate: false,
             }
           }
         },
@@ -51,7 +52,7 @@ test('flatten - case 1', t => {
 
   const actual = flatten(fields);
   const expected = {
-    'basics.fruit.allowEmpty': false,
+    'basics.fruit.includeEmpty': false,
     'basics.fruit.value': 'banana',
     'basics.fruit.error': null,
     'basics.fruit.exclude': false,
@@ -63,8 +64,13 @@ test('flatten - case 1', t => {
     'basics.fruit.preValidate': false,
     'basics.fruit.validate': false,
     'basics.fruit.disabled': false,
+    'basics.fruit.displayValue': null,
+    'basics.fruit.snapshot': '',
+    'basics.fruit.serialize': serialize,
+    'basics.fruit.placeholder': null,
+    'basics.fruit.order': null,
 
-    'basics.recipients.0.person.firstName.allowEmpty': false,
+    'basics.recipients.0.person.firstName.includeEmpty': false,
     'basics.recipients.0.person.firstName.value': 'Joe',
     'basics.recipients.0.person.firstName.error': null,
     'basics.recipients.0.person.firstName.exclude': false,
@@ -76,8 +82,13 @@ test('flatten - case 1', t => {
     'basics.recipients.0.person.firstName.preValidate': false,
     'basics.recipients.0.person.firstName.validate': false,
     'basics.recipients.0.person.firstName.disabled': false,
+    'basics.recipients.0.person.firstName.snapshot': '',
+    'basics.recipients.0.person.firstName.displayValue': null,
+    'basics.recipients.0.person.firstName.serialize': serialize,
+    'basics.recipients.0.person.firstName.placeholder': null,
+    'basics.recipients.0.person.firstName.order': null,
 
-    'basics.recipients.1.person.firstName.allowEmpty': false,
+    'basics.recipients.1.person.firstName.includeEmpty': false,
     'basics.recipients.1.person.firstName.value': 'Bill',
     'basics.recipients.1.person.firstName.error': null,
     'basics.recipients.1.person.firstName.exclude': false,
@@ -89,8 +100,13 @@ test('flatten - case 1', t => {
     'basics.recipients.1.person.firstName.preValidate': false,
     'basics.recipients.1.person.firstName.validate': false,
     'basics.recipients.1.person.firstName.disabled': false,
+    'basics.recipients.1.person.firstName.snapshot': '',
+    'basics.recipients.1.person.firstName.displayValue': null,
+    'basics.recipients.1.person.firstName.serialize': serialize,
+    'basics.recipients.1.person.firstName.placeholder': null,
+    'basics.recipients.1.person.firstName.order': null,
 
-    'order.orderNumber.allowEmpty': false,
+    'order.orderNumber.includeEmpty': false,
     'order.orderNumber.value': '2453',
     'order.orderNumber.error': 'Something went wrong',
     'order.orderNumber.exclude': false,
@@ -102,6 +118,11 @@ test('flatten - case 1', t => {
     'order.orderNumber.preValidate': false,
     'order.orderNumber.validate': false,
     'order.orderNumber.disabled': false,
+    'order.orderNumber.snapshot': '',
+    'order.orderNumber.displayValue': null,
+    'order.orderNumber.serialize': serialize,
+    'order.orderNumber.placeholder': null,
+    'order.orderNumber.order': null,
 
     'products': null
   };

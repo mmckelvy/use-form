@@ -6,19 +6,21 @@ export default [
   'value',
   'displayValue',
   'checked',
+  'snapshot',
 
   // state data
   'error',
   'isValid',
   'disabled',
-  'allowEmpty',
 
   // metadata
   'type',
   'label',
   'placeholder',
-  'path',
   'order',
+
+  // navigation
+  'path',
 
   // validation
   'required',
@@ -27,5 +29,6 @@ export default [
 
   // serialize
   'serialize',
-  'exclude'
+  'includeEmpty',
+  'exclude',
 ];

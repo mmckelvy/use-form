@@ -6,6 +6,7 @@ import structure from './structure.js';
 import _removeField from './remove-field.js';
 import _handleSubmit from './handle-submit.js';
 import checkFormChanged from './check-form-changed.js';
+import buildUpdate from './build-update.js';
 
 function _handleChange(e, _setFields) {
   const name = e.target.name;
@@ -16,7 +17,10 @@ function _handleChange(e, _setFields) {
   const key = [...parsePath(name), 'value'].join('.');
 
   _setFields((prevFields) => {
-    return {...prevFields, ...{[key]: val}};
+    return {
+      ...prevFields,
+      [key]: val
+    };
   });
 }
 
@@ -48,7 +52,21 @@ export default function useForm(initialFields = {}) {
 
   return {
     fields: structure(_fields),
-    setFields: (fields, options = {}) => {
+    handleChange: (e) => {
+      _handleChange(e, _setFields);
+    },
+    handleSubmit: ({ fields } = {}) => {
+      return _handleSubmit({_fields, _setFields, fields});
+    },
+    setFields: (update) => {
+      _setFields((prevFields) => {
+        return {
+          ...prevFields,
+          ...buildUpdate(update)
+        };
+      });
+    },
+    replaceFields: (fields, options = {}) => {
       let updatedFields;
       
       _setFields((_prevFields) => {
@@ -66,6 +84,16 @@ export default function useForm(initialFields = {}) {
         _setResetPoint({...updatedFields, ...flatten(fields)});
       }
     },
+    setResetPoint: (fields) => {
+      if (fields) {
+        _setResetPoint(flatten(fields));
+      }
+      _setResetPoint(_fields);
+    },
+    reset: () => {
+      _setFields(resetPoint);
+    },
+    hasChanged: checkFormChanged({_fields, resetPoint}),
     setField: (path, value) => {
       _setField(path, value, _setFields);
     },
@@ -73,21 +101,5 @@ export default function useForm(initialFields = {}) {
       const f = _removeField(path, _fields);
       _setFields(f);
     },
-    handleChange: (e) => {
-      _handleChange(e, _setFields);
-    },
-    handleSubmit: () => {
-      return _handleSubmit({_fields, _setFields});
-    },
-    reset: () => {
-      _setFields(resetPoint);
-    },
-    hasChanged: checkFormChanged({_fields, resetPoint}),
-    setResetPoint: (fields) => {
-      if (fields) {
-        _setResetPoint(flatten(fields));
-      }
-      _setResetPoint(_fields);
-    }
   };
 };
