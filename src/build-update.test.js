@@ -48,11 +48,30 @@ test('buildUpdate - Case 2', t => {
   t.deepEqual(actual, expected);
 });
 
-// Throw on undefined
+// Throw on path undefined
 test('buildUpdate - Case 3', t => {
   const update = [
     {
       value: 'bar'
+    },
+    {
+      path: 'fizz.buzz.1.apple',
+      value: 96
+    },
+  ];
+
+  const error = t.throws(() => {
+    buildUpdate(update);
+  });
+
+  t.is(error.message, `'path' and 'value' are required.`);
+});
+
+// Throw on value undefined
+test('buildUpdate - Case 4', t => {
+  const update = [
+    {
+      path: 'foo.bar[0].baz',
     },
     {
       path: 'fizz.buzz.1.apple',
