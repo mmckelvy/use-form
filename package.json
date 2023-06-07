@@ -1,6 +1,6 @@
 {
   "name": "@mmckelvy/use-form",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Simple, hooks based React form utility.",
   "main": "src/index.js",
   "scripts": {
