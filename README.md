@@ -1,8 +1,13 @@
 # useForm
 A lightweight, flexible hook for managing form state.
 
-## Motivation
-I wanted a React form library that could handle complex forms (e.g. nested fields, arrays) with a simple API.
+
+## Features
+* Hooks based.
+* Simple API. No render props, custom components, Context, or magic.
+* Handles complex form structures including arrays and nesting.
+* Built in pre-validation, validation, and serialization with override options.
+* Tools to handle custom form elements (e.g. React Select), undos, resets, wizards, and more.
 
 
 ## Installation
@@ -64,7 +69,7 @@ export default function MyForm() {
 ```
 
 
-## Demo and examples
+## Demo
 ```
 npm install
 ```
@@ -169,7 +174,7 @@ String, number, JS date object, or a boolean. Optional.
 
 A snapshot of the `value` property. Useful for undos.
 
-Default: empty string
+Default: empty string.
 
 
 **`disabled`**
@@ -187,7 +192,7 @@ String / Enum. Optional.
 
 The field type. One of 'number', 'text', 'boolean', or 'multiLine'.
 
-Default: `'text'`
+Default: `'text'`.
 
 
 **`label`**
@@ -196,7 +201,7 @@ String. Optional.
 
 The field label.
 
-Default: Proper case of the field name.  e.g. 'firstName' -> 'First name'
+Default: Proper case of the field name.  e.g. 'firstName' -> 'First name'.
 
 
 **`placeholder`**
@@ -237,7 +242,7 @@ foo: {
 console.log(baz.path) // foo.bar.0.baz
 ```
 
-Default: automatic
+Default: automatic.
 
 
 **`required`**
@@ -274,7 +279,7 @@ Function or Boolean. Optional.
 
 A function that is called after pre-validation during `handleSubmit`. Signature is:
 
-```
+```js
 validate({ value, field, fields })
 ```
 
@@ -282,7 +287,7 @@ where `value` is the field's value, `field` is the full field with _all_ propert
 
 Returns an object with the following properties:
 
-```
+```js
 isValid: <Boolean>, // Whether the field is valid.
 value: <String> or <Number>, // The field value
 error: <String>, An error message, if applicable.
@@ -299,7 +304,7 @@ Boolean. Optional.
 
 Whether or not the field passed validation.
 
-Default: `true`
+Default: `true`.
 
 
 **`error`**
@@ -308,7 +313,7 @@ String. Optional.
 
 An error message. Set automatically during validation as appropriate.
 
-Default: `null`
+Default: `null`.
 
 
 **`serialize`**
@@ -317,7 +322,7 @@ Function. Optional.
 
 A function that is called after validation during `handleSubmit`.  Signature is:
 
-```
+```js
 serialize({ value, field, fields })
 ```
 
@@ -347,7 +352,6 @@ Default: `false`.
 
 
 #### Field structure
-
 Fields can have nested or array structures: 
 
 ```javascript
@@ -388,6 +392,7 @@ const fields = {
 In this case, the input name for the first key would be `basics.fruit`, and the input name for the first recipient would be `basics.recipients[0].person`.  See the [examples](./demo/app/frontend/js/src/views/Root) in the demo folder for reference.
 
 You can nest as deeply as you want.  The one requirement is that the leaf object should hold your actual field properties (e.g. `value`, `label`, etc.).
+
 
 #### Submitting the form
 As referenced previously, when you call `handleSubmit`, all fields pass through a three step process:
@@ -442,6 +447,124 @@ Again, you can pass your own function for `preValidate`, `validate`, and/or `ser
 
 `serialize` should return the serialized `value`.
 
+
 #### Modifying fields
-`handleChange` should take care of your general `onChange` handlers.  In some cases however, you may need more control over how you set a specific field, or you may need to replace or reset one or more fields.  For that you can use `setFields` or `replaceFields`.
+`handleChange` should take care of your general `onChange` handlers.  Simply pass `handleChange` to your input's `onChange` property and useForm will take care of the rest.
+
+useForm also provides several other functions and properties when you need to handle selects or more complicated inputs, or you need more control over form state:
+
+
+**`setFields`**
+
+Set an array of field properties at specified paths.
+
+Signature:
+
+```js
+setFields([
+  {
+    path,
+    value,
+  },
+])
+```
+
+where `path` is a path to the field property you want to set (e.g. `foo.bar.baz.value`) and `value` is the value you want to set the property to.
+
+You can set any number of fields and you can set any field property (e.g. `value`, `displayValue`, `checked`, `error`, etc.).
+
+See [WithSelects](./demo/app/frontend/js/src/views/Root/WithSelects) for an example of how `setFields` can help you manage a select element and [Undo](./demo/app/frontend/js/src/views/Root/WithSelects) for an example of how `setFields` can help you implement undo functionality.
+
+
+**`replaceFields`**
+
+Replace all fields at the specified key(s) with new fields.
+
+Signature:
+
+```js
+replaceFields(fields)
+```
+
+where `fields` is a fields object that contains the new fields.  Note that the fields will replace each top level key that matches.  So if you have an existing set of fields like so:
+
+```js
+{
+  employee: {
+    firstName: {
+      value: 'John'
+    },
+    lastName: {
+      value: 'Smith'
+    }
+  }
+}
+```
+
+and you call:
+
+```js
+replaceFields({
+  employee: {
+    firstName: {
+      value: 'Bill'
+    },
+    lastName: {
+      value: 'Jenkins'
+    }
+  }
+})
+```
+
+The `employee` key, and everything below it will be replaced with the new `fields` object you pass in.
+
+See [WithArrays](./demo/app/frontend/js/src/views/Root/WithArrays) for an example of how `replaceFields` can help you add and remove elements in an array of inputs.
+
+
+**`setResetPoint`**
+
+Set a reset point for later `resets`.
+
+Signature:
+
+```js
+setRestPoint(fields)
+```
+
+where `fields` is an optional fields object.  If you don't pass in `fields`, a reset point will be created with the current form state.  If you do pass in a `fields` object, those fields will be used to set the reset point.
+
+See [ResetForm](./demo/app/frontend/js/src/views/Root/ResetForm) for an example of how `setResetPoint` can help you reset a form.
+
+
+**`reset`**
+
+Reset a form.  If a reset point has been set via `setResetPoint`, then the form will be reset to that state, else it will be reset to its initial state.
+
+Signature:
+
+```js
+reset()
+```
+
+This function takes no arguments.
+
+
+**`hasChanged`**
+
+A boolean value that indicates if any part of the form has changed.
+
+
+## Testing
+Run the unit tests
+
+```
+npm run test:unit
+```
+
+Run the component tests (uses Cypress)
+
+```
+npm run test:component
+```
+
 
