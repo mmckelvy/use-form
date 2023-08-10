@@ -11,6 +11,7 @@ test('flatten - case 1', t => {
         label: 'Fruit',
         preValidate: false,
         validate: false,
+        displayValue: 'Banana'
       },
       recipients: [
         {
@@ -63,8 +64,9 @@ test('flatten - case 1', t => {
     'basics.fruit.path': 'basics.fruit',
     'basics.fruit.preValidate': false,
     'basics.fruit.validate': false,
+    'basics.fruit.checked': null,
     'basics.fruit.disabled': false,
-    'basics.fruit.displayValue': null,
+    'basics.fruit.displayValue': 'Banana',
     'basics.fruit.snapshot': '',
     'basics.fruit.serialize': serialize,
     'basics.fruit.placeholder': null,
@@ -81,6 +83,7 @@ test('flatten - case 1', t => {
     'basics.recipients.0.person.firstName.path': 'basics.recipients.0.person.firstName',
     'basics.recipients.0.person.firstName.preValidate': false,
     'basics.recipients.0.person.firstName.validate': false,
+    'basics.recipients.0.person.firstName.checked': null,
     'basics.recipients.0.person.firstName.disabled': false,
     'basics.recipients.0.person.firstName.snapshot': '',
     'basics.recipients.0.person.firstName.displayValue': null,
@@ -99,6 +102,7 @@ test('flatten - case 1', t => {
     'basics.recipients.1.person.firstName.path': 'basics.recipients.1.person.firstName',
     'basics.recipients.1.person.firstName.preValidate': false,
     'basics.recipients.1.person.firstName.validate': false,
+    'basics.recipients.1.person.firstName.checked': null,
     'basics.recipients.1.person.firstName.disabled': false,
     'basics.recipients.1.person.firstName.snapshot': '',
     'basics.recipients.1.person.firstName.displayValue': null,
@@ -117,6 +121,7 @@ test('flatten - case 1', t => {
     'order.orderNumber.path': 'order.orderNumber',
     'order.orderNumber.preValidate': false,
     'order.orderNumber.validate': false,
+    'order.orderNumber.checked': null,
     'order.orderNumber.disabled': false,
     'order.orderNumber.snapshot': '',
     'order.orderNumber.displayValue': null,

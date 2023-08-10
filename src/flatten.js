@@ -45,7 +45,7 @@ export default function flatten(fields) {
         }
 
         if (!Object.hasOwn(val, 'checked')) {
-          val.displayValue = null;
+          val.checked = null;
         }
 
         if (!Object.hasOwn(val, 'snapshot')) {
