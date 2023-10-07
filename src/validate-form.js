@@ -34,6 +34,25 @@ export default function validateForm({
           error: null
         };
 
+      } else if (field.schema) {
+        const s = field.schema();
+        const { error } = s.validate(val);
+
+        if (error) {
+          result = {
+            isValid: false,
+            value: val,
+            error: error.message.replaceAll(`"`, '')
+          };
+
+        } else {
+          result = {
+            isValid: true,
+            value: val,
+            error: null
+          }
+        }
+
       } else {
         result = field.validate({
           value: val,

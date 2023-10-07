@@ -11,6 +11,7 @@ import Wizard from './Wizard';
 import Undo from './Undo';
 import ResetForm from './ResetForm';
 import KitchenSink from './KitchenSink';
+import Experimental from './Experimental';
 
 export default function Root() {
   return (
@@ -34,6 +35,7 @@ export default function Root() {
         <a href="/undo">Undo</a>
         <a href="/reset-form">Reset Form</a>
         <a href="/kitchen-sink">Kitchen Sink</a>
+        <a href="/experimental">Experimental</a>
       </div>
 
 
@@ -69,6 +71,10 @@ export default function Root() {
       <Route
         path="/kitchen-sink"
         element={<KitchenSink />}
+      />
+      <Route
+        path="/experimental"
+        element={<Experimental />}
       />
     </div>
   );
