@@ -3,7 +3,7 @@ import validateForm from './validate-form.js';
 import serializeForm from './serialize-form.js';
 import filterFields from './filter-fields.js';
 import applySchemaValidation from './apply-schema-validation.js';
-import applySchemaValidation from './apply-schema-validation.js';
+import buildUpdate from './build-update';
 
 /*
 Pre-validates, validates, and then serializes a set of _fields.
@@ -53,54 +53,65 @@ export default function handleSubmit({
   // Filter any fields if necessary.
   const f = filterFields({_fields, fields});
 
-  // Pre-validate if desired
   const preValidated = preValidate
     ? preValidateForm({_fields: f})
     : f
   ;
 
-  if (validate) {
-    // If the user has passed in a validation schema, serialize
-    // the form first so it's in the expected format for the schema.
-    if (schema) {
-      const values = serializeForm({
-        _validatedFields: preValidated
-      });
+  const results = {};
 
-      // Now apply the schema validation.
-      const { isValid, errors } = applySchemaValidation({
-        values,
-        schema: options.schema
-      });
+  /*
+  If 'validate' is false or 'schema' is true, the default
+  validation will not run.  This will just clear any errors that
+  were previously set.
+  */
+  const {
+    isValid: isValidDefault,
+    _validatedFields,
+    errors: defaultErrors
+  } = validateForm({
+    _preValidatedFields: preValidated,
+    _setFields,
+    skipValidation: !validate || schema
+  });
 
-      if (!isValid) {
-        // Update the "error" property for all fields as appropriate.
-        applyErrors({
-          _setFields,
-          errors
-        });
-      }
+  results.errors = defaultErrors;
 
-      return {isValid, values};
+  // Set the overall 'isValid' based on the results of the default
+  // validation.
+  results.isValid = isValidDefault;
 
-    // Use the built in validators
-    } else {
-      const { isValid, _validatedFields } = validateForm({
-        _preValidatedFields: preValidated,
-        _setFields
-      });
+  const values = serializeForm({_validatedFields});
+  results.values = values;
 
-      const values = serializeForm({_validatedFields});
-
-      return {isValid, values};
-    }
-
-  // Skip validation
-  } else {
-    const values = serializeForm({
-      _validatedFields: preValidated
+  // Apply schema validation if necessary.  Schema validation
+  // occurs after serialization because it can only be applied to serialized
+  // results.
+  if (schema) {
+    const {
+      isValid: isValidSchema,
+      fieldUpdates,
+      errors: schemaErrors
+    } = applySchemaValidation({
+      _fields,
+      values,
+      schema
     });
 
-    return {isValid: true, values};
+    // Update the results with the results of the schema validation.
+    results.isValid = isValidSchema;
+    results.errors = schemaErrors;
+
+    // Update the error fields with any new errors as appropriate.
+    if (fieldUpdates.length) {
+      _setFields((prevFields) => {
+        return {
+          ...prevFields,
+          ...buildUpdate(fieldUpdates)
+        };
+      });
+    }
   }
+
+  return results;
 }

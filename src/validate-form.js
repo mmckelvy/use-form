@@ -7,8 +7,16 @@ import structure from './structure.js';
 export default function validateForm({
   _preValidatedFields,
   _setFields,
+  skipValidation
 }) {
-  const results = {isValid: true, _validatedFields: {}};
+  const results = {
+    isValid: true,
+    _validatedFields: {},
+    errors: {
+      fieldErrors: [],
+      generalErrors: []
+    }
+  };
   const stateUpdates = {};
 
   for (let [ flatPath, val ] of Object.entries(_preValidatedFields)) {
@@ -27,31 +35,12 @@ export default function validateForm({
 
       let result;
 
-      if (!field.validate) {
+      if (skipValidation || !field.validate) {
         result = {
           isValid: true,
           value: val,
           error: null
         };
-
-      } else if (field.schema) {
-        const s = field.schema();
-        const { error } = s.validate(val);
-
-        if (error) {
-          result = {
-            isValid: false,
-            value: val,
-            error: error.message.replaceAll(`"`, '')
-          };
-
-        } else {
-          result = {
-            isValid: true,
-            value: val,
-            error: null
-          }
-        }
 
       } else {
         result = field.validate({
@@ -68,6 +57,13 @@ export default function validateForm({
       results._validatedFields[flatPath] = result.value;
       results._validatedFields[errorKey] = result.error;
       results._validatedFields[isValidKey] = result.isValid;
+
+      if (result.error) {
+        results.errors.fieldErrors.push({
+          path: errorKey,
+          message: result.error
+        });
+      }
 
       stateUpdates[errorKey] = result.error;
       stateUpdates[isValidKey] = result.isValid;

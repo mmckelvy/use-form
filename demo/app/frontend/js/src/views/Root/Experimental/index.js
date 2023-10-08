@@ -4,17 +4,21 @@ import joi from 'joi';
 import useForm from 'useForm';
 
 export default function Experimental() {
-  const { fields, handleChange, handleSubmit } = useForm({
+  const f = {
     firstName: {
       value: ''
     },
     lastName: {
       value: '',
-      schema: () => {
-        return joi.string().required().label('Last Name')
-      },
     },
+  };
+
+  const schema = joi.object({
+    firstName: joi.string().required().label('First Name'),
+    lastName: joi.string().required()
   });
+
+  const { fields, handleChange, handleSubmit } = useForm(f);
 
   const [ valuesDisplay, setValuesDisplay ] = useState({});
   const [ fieldsDisplay, setFieldsDisplay ] = useState({});
@@ -102,7 +106,7 @@ export default function Experimental() {
           style={{width: '25%'}}
           data-cy="submit"
           onClick={() => {
-            const { isValid, values } = handleSubmit();
+            const { isValid, values } = handleSubmit({schema});
             setValuesDisplay(values);
           }}>
 
