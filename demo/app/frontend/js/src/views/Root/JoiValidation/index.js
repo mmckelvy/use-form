@@ -142,6 +142,19 @@ export default function JoiValidation() {
           );
         })}
 
+        <div>
+          <span
+            style={{
+              color: 'red',
+              fontSize: '12px'
+            }}>
+
+            {errorsDisplay.generalErrors &&
+              errorsDisplay.generalErrors[0].message
+            }
+          </span>
+        </div>
+
         <div
           style={{
             display: 'grid',

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 export default function SubmitPage({ fields, handleSubmit }) {
   const [ valuesDisplay, setValuesDisplay ] = useState({});
   const [ fieldsDisplay, setFieldsDisplay ] = useState({});
+  const [ errorsDisplay, setErrorsDisplay ] = useState({});
 
   return (
     <div
@@ -26,8 +27,9 @@ export default function SubmitPage({ fields, handleSubmit }) {
         <button
           type="button"
           onClick={() => {
-            const { isValid, values } = handleSubmit();
+            const { isValid, values, errors } = handleSubmit();
             setValuesDisplay(values);
+            setErrorsDisplay(errors);
           }}>
 
           Submit
@@ -38,6 +40,15 @@ export default function SubmitPage({ fields, handleSubmit }) {
       <div>
         <span>Serialized Values:</span>
         <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
+      </div>
+
+      {/* Errors */}
+      <div>
+        <span>Errors:</span>
+        <pre>
+
+          {JSON.stringify(errorsDisplay, null, 2)}
+        </pre>
       </div>
 
       {/* Fields */}

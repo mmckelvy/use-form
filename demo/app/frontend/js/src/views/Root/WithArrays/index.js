@@ -18,6 +18,7 @@ export default function WithArrays() {
 
   const [ valuesDisplay, setValuesDisplay ] = useState({});
   const [ fieldsDisplay, setFieldsDisplay ] = useState({});
+  const [ errorsDisplay, setErrorsDisplay ] = useState({});
 
   return (
     <div
@@ -143,8 +144,9 @@ export default function WithArrays() {
         <button
           type="button"
           onClick={() => {
-            const { isValid, values } = handleSubmit();
+            const { isValid, values, errors } = handleSubmit();
             setValuesDisplay(values);
+            setErrorsDisplay(errors);
           }}>
 
           Submit
@@ -156,6 +158,15 @@ export default function WithArrays() {
         <span>Serialized Values:</span>
         <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
       </div>
+
+      <div>
+        <span>Errors:</span>
+        <pre>
+
+          {JSON.stringify(errorsDisplay, null, 2)}
+        </pre>
+      </div>
+
 
       {/* Fields */}
       <div

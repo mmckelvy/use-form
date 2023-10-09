@@ -141,6 +141,7 @@ export default function Undo() {
           onClick={() => {
             console.log(fields);
             setFieldsDisplay(fields);
+
           }}>
 
           View Fields
