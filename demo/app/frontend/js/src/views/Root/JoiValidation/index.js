@@ -62,7 +62,6 @@ export default function JoiValidation() {
           />
 
           <span
-            data-cy="subjectError"
             style={{
               color: 'red',
               fontSize: '12px'
@@ -98,6 +97,7 @@ export default function JoiValidation() {
                   name={`recipients[${i}].email`}
                   value={r.email.value}
                   onChange={handleChange}
+                  data-cy={`recipients${i}EmailInput`}
                 />
 
                 <span
@@ -125,6 +125,7 @@ export default function JoiValidation() {
                   name={`recipients[${i}].location`}
                   value={r.location.value}
                   onChange={handleChange}
+                  data-cy={`recipients${i}LocationInput`}
                 />
 
                 <span
@@ -149,7 +150,7 @@ export default function JoiValidation() {
               fontSize: '12px'
             }}>
 
-            {errorsDisplay.generalErrors &&
+            {errorsDisplay.generalErrors?.length &&
               errorsDisplay.generalErrors[0].message
             }
           </span>
@@ -164,7 +165,6 @@ export default function JoiValidation() {
 
           <button
             type="button"
-            data-cy="removeRecipient"
             disabled={fields.recipients.length < 2}
             onClick={() => {
               const r = fields.recipients
@@ -180,7 +180,6 @@ export default function JoiValidation() {
 
           <button
             type="button"
-            data-cy="addRecipient"
             onClick={() => {
               replaceFields({
                 recipients: [
@@ -203,6 +202,7 @@ export default function JoiValidation() {
 
         <button
           type="button"
+          data-cy="submit"
           onClick={() => {
             const { isValid, values, errors } = handleSubmit({
               schema: joi.object({
@@ -227,13 +227,19 @@ export default function JoiValidation() {
       {/* Serialized values */}
       <div>
         <span>Serialized Values:</span>
-        <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
+        <pre
+          data-cy="results">
+          {JSON.stringify(valuesDisplay, null, 2)}
+        </pre>
       </div>
 
       {/* Errors */}
       <div>
         <span>Errors:</span>
-        <pre>{JSON.stringify(errorsDisplay, null, 2)}</pre>
+        <pre
+          data-cy="errors">
+          {JSON.stringify(errorsDisplay, null, 2)}
+        </pre>
       </div>
 
       {/* Fields */}
@@ -246,7 +252,6 @@ export default function JoiValidation() {
 
         <button
           type="button"
-          data-cy="viewFields"
           style={{width: '25%'}}
           onClick={() => {
             console.log(fields);

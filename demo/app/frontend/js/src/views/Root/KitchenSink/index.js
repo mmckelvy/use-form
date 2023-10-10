@@ -114,6 +114,7 @@ export default function KitchenSink() {
 
   const [ valuesDisplay, setValuesDisplay ] = useState({});
   const [ fieldsDisplay, setFieldsDisplay ] = useState({});
+  const [ errorsDisplay, setErrorsDisplay ] = useState({});
 
   return (
     <div
@@ -445,8 +446,9 @@ export default function KitchenSink() {
             type="button"
             style={{width: '50%'}}
             onClick={() => {
-              const { isValid, values } = handleSubmit();
+              const { isValid, values, errors } = handleSubmit();
               setValuesDisplay(values);
+              setErrorsDisplay(errors);
             }}>
 
             Submit
@@ -458,6 +460,15 @@ export default function KitchenSink() {
       <div>
         <span>Serialized Values:</span>
         <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
+      </div>
+
+      {/* Errors */}
+      <div>
+        <span>Errors:</span>
+        <pre>
+
+          {JSON.stringify(errorsDisplay, null, 2)}
+        </pre>
       </div>
 
       {/* Fields */}
