@@ -22,6 +22,7 @@ export default function Experimental() {
 
   const [ valuesDisplay, setValuesDisplay ] = useState({});
   const [ fieldsDisplay, setFieldsDisplay ] = useState({});
+  const [ errorsDisplay, setErrorsDisplay ] = useState({});
 
   return (
     <div
@@ -106,8 +107,13 @@ export default function Experimental() {
           style={{width: '25%'}}
           data-cy="submit"
           onClick={() => {
-            const { isValid, values } = handleSubmit({schema});
+            const { isValid, values, errors } = handleSubmit({
+              schema,
+              validate: false,
+              preValidate: false
+            });
             setValuesDisplay(values);
+            setErrorsDisplay(errors);
           }}>
 
           Submit
@@ -122,6 +128,15 @@ export default function Experimental() {
           data-cy="results">
 
           {JSON.stringify(valuesDisplay, null, 2)}
+        </pre>
+      </div>
+
+      {/* Errors */}
+      <div>
+        <span>Errors:</span>
+        <pre>
+
+          {JSON.stringify(errorsDisplay, null, 2)}
         </pre>
       </div>
 

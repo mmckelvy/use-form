@@ -54,7 +54,7 @@ export default function handleSubmit({
   const f = filterFields({_fields, fields});
 
   const preValidated = preValidate
-    ? preValidateForm({_fields: f})
+    ? preValidateForm({_fields: f, skipPreValidation: !preValidate})
     : f
   ;
 
@@ -87,7 +87,7 @@ export default function handleSubmit({
   // Apply schema validation if necessary.  Schema validation
   // occurs after serialization because it can only be applied to serialized
   // results.
-  if (schema) {
+  if (schema && validate) {
     const {
       isValid: isValidSchema,
       fieldUpdates,
