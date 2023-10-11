@@ -488,7 +488,7 @@ See [JoiValidation](./demo/app/frontend/js/src/views/Root/JoiValidation) for an 
 {
   isValid <Boolean>,
   values <Object>,
-  errors: <Object>
+  errors <Object>
 }
 ```
 
@@ -496,7 +496,7 @@ See [JoiValidation](./demo/app/frontend/js/src/views/Root/JoiValidation) for an 
 
 `values` are the seralized values from the form.
 
-`errors` is an object with two properties: `fieldErrors`, or errors for individual fields, and `generalErrors`, errors usually resulting from a Joi schema validation run that don't apply to individual fields.
+`errors` is an object with two properties: `fieldErrors`, errors for individual fields, and `generalErrors`, errors resulting from a Joi schema validation run that don't apply to individual fields.
 
 #### Modifying fields
 `handleChange` should take care of your general `onChange` handlers.  Simply pass `handleChange` to your input's `onChange` property and useForm will take care of the rest.
