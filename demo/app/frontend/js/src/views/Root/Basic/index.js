@@ -14,6 +14,7 @@ export default function Basic() {
 
   const [ valuesDisplay, setValuesDisplay ] = useState({});
   const [ fieldsDisplay, setFieldsDisplay ] = useState({});
+  const [ errorsDisplay, setErrorsDisplay ] = useState({});
 
   return (
     <div
@@ -98,8 +99,9 @@ export default function Basic() {
           style={{width: '25%'}}
           data-cy="submit"
           onClick={() => {
-            const { isValid, values } = handleSubmit();
+            const { isValid, values, errors } = handleSubmit();
             setValuesDisplay(values);
+            setErrorsDisplay(errors);
           }}>
 
           Submit
@@ -114,6 +116,15 @@ export default function Basic() {
           data-cy="results">
 
           {JSON.stringify(valuesDisplay, null, 2)}
+        </pre>
+      </div>
+
+      {/* Errors */}
+      <div>
+        <span>Errors:</span>
+        <pre>
+
+          {JSON.stringify(errorsDisplay, null, 2)}
         </pre>
       </div>
 

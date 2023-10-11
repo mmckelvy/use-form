@@ -7,6 +7,7 @@ A lightweight, flexible hook for managing form state.
 * Simple API. No render props, custom components, Context, or magic.
 * Handles complex form structures including arrays and nesting.
 * Built in pre-validation, validation, and serialization with override options.
+* Joi integration.
 * Tools to handle custom form elements (e.g. React Select), undos, resets, wizards, and more.
 
 
@@ -447,6 +448,55 @@ Again, you can pass your own function for `preValidate`, `validate`, and/or `ser
 
 `serialize` should return the serialized `value`.
 
+`handleSubmit` has several options.  The signature for the function is as follows:
+
+```javascript
+handleSubmit({
+  fields <Array of Objects>
+  preValidate <Boolean>,
+  validate <Boolean>,
+  schema <Joi Validation Schema>
+})
+```
+
+`fields` should be an array of the format:
+
+```javascript
+[
+  {
+    path: 'lastName'
+  },
+  ...
+]
+```
+
+If you pass in `fields`, only those fields will be pre-validated, validated, and serialized.
+
+If `preValidate` is set to `false`, pre-validation will be skipped.  Same with `validate`.
+
+**Validating with Joi**
+
+You can use [Joi](https://joi.dev/) schemas to validate your inputs.  Pass in a schema and that schema's `validate` method will be run against a serialized version of the form fields.  Any Joi errors will be set on the appropriate field's `error` property.
+
+See [JoiValidation](./demo/app/frontend/js/src/views/Root/JoiValidation) for an example.
+
+**Return Values**
+
+`handleSubmit` returns an object with the following properties:
+
+```javascript
+{
+  isValid <Boolean>,
+  values <Object>,
+  errors <Object>
+}
+```
+
+`isValid` notes whether there were any validation errors.
+
+`values` are the seralized values from the form.
+
+`errors` is an object with two properties: `fieldErrors`, errors for individual fields, and `generalErrors`, errors resulting from a Joi schema validation run that don't apply to individual fields.
 
 #### Modifying fields
 `handleChange` should take care of your general `onChange` handlers.  Simply pass `handleChange` to your input's `onChange` property and useForm will take care of the rest.

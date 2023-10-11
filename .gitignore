@@ -3,3 +3,4 @@ node_modules
 cypress/downloads/
 cypress/screenshots/
 cypress/videos/
+demo/app/frontend/js/dist

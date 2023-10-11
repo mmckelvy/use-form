@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import joi from 'joi';
 
 import useForm from 'useForm';
 
-export default function WithArrays() {
+export default function JoiValidation() {
   const { fields, handleChange, replaceFields, handleSubmit } = useForm({
+    subject: {
+      value: ''
+    },
     recipients: [
       {
         email: {
@@ -17,8 +21,8 @@ export default function WithArrays() {
   });
 
   const [ valuesDisplay, setValuesDisplay ] = useState({});
-  const [ fieldsDisplay, setFieldsDisplay ] = useState({});
   const [ errorsDisplay, setErrorsDisplay ] = useState({});
+  const [ fieldsDisplay, setFieldsDisplay ] = useState({});
 
   return (
     <div
@@ -38,6 +42,35 @@ export default function WithArrays() {
           gridTemplateColumns: '1fr',
           rowGap: '16px'
         }}>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            rowGap: '8px'
+          }}>
+
+          <label style={{fontSize: '12px'}}>
+            {fields.subject.label}
+          </label>
+
+          <input
+            name="subject"
+            value={fields.subject.value}
+            onChange={handleChange}
+            data-cy="subjectInput"
+          />
+
+          <span
+            style={{
+              color: 'red',
+              fontSize: '12px'
+            }}>
+
+            {fields.subject.error}
+          </span>
+
+        </div>
 
         {fields.recipients.map((r, i) => {
           return (
@@ -64,9 +97,16 @@ export default function WithArrays() {
                   name={`recipients[${i}].email`}
                   value={r.email.value}
                   onChange={handleChange}
+                  data-cy={`recipients${i}EmailInput`}
                 />
 
-                <span style={{color: 'red'}}>{r.email.error}</span>
+                <span
+                  style={{
+                    color: 'red',
+                    fontSize: '12px'
+                  }}>
+                  {r.email.error}
+                </span>
 
               </div>
 
@@ -85,15 +125,36 @@ export default function WithArrays() {
                   name={`recipients[${i}].location`}
                   value={r.location.value}
                   onChange={handleChange}
+                  data-cy={`recipients${i}LocationInput`}
                 />
 
-                <span style={{color: 'red'}}>{r.location.error}</span>
+                <span
+                  style={{
+                    color: 'red',
+                    fontSize: '12px'
+                  }}>
+
+                  {r.location.error}
+                </span>
 
               </div>
 
             </div>
           );
         })}
+
+        <div>
+          <span
+            style={{
+              color: 'red',
+              fontSize: '12px'
+            }}>
+
+            {errorsDisplay.generalErrors?.length &&
+              errorsDisplay.generalErrors[0].message
+            }
+          </span>
+        </div>
 
         <div
           style={{
@@ -104,7 +165,6 @@ export default function WithArrays() {
 
           <button
             type="button"
-            data-cy="removeRecipient"
             disabled={fields.recipients.length < 2}
             onClick={() => {
               const r = fields.recipients
@@ -120,7 +180,6 @@ export default function WithArrays() {
 
           <button
             type="button"
-            data-cy="addRecipient"
             onClick={() => {
               replaceFields({
                 recipients: [
@@ -143,8 +202,20 @@ export default function WithArrays() {
 
         <button
           type="button"
+          data-cy="submit"
           onClick={() => {
-            const { isValid, values, errors } = handleSubmit();
+            const { isValid, values, errors } = handleSubmit({
+              schema: joi.object({
+                subject: joi.string().required().label('Subject'),
+                recipients: joi.array().min(1).items(
+                  joi.object({
+                    email: joi.string().required().label('Email'),
+                    location: joi.string().required().label('Location')
+                  })
+                ).required().label('Recipients')
+              })
+            });
+
             setValuesDisplay(values);
             setErrorsDisplay(errors);
           }}>
@@ -156,17 +227,20 @@ export default function WithArrays() {
       {/* Serialized values */}
       <div>
         <span>Serialized Values:</span>
-        <pre>{JSON.stringify(valuesDisplay, null, 2)}</pre>
-      </div>
-
-      <div>
-        <span>Errors:</span>
-        <pre>
-
-          {JSON.stringify(errorsDisplay, null, 2)}
+        <pre
+          data-cy="results">
+          {JSON.stringify(valuesDisplay, null, 2)}
         </pre>
       </div>
 
+      {/* Errors */}
+      <div>
+        <span>Errors:</span>
+        <pre
+          data-cy="errors">
+          {JSON.stringify(errorsDisplay, null, 2)}
+        </pre>
+      </div>
 
       {/* Fields */}
       <div
@@ -178,7 +252,6 @@ export default function WithArrays() {
 
         <button
           type="button"
-          data-cy="viewFields"
           style={{width: '25%'}}
           onClick={() => {
             console.log(fields);
@@ -199,5 +272,3 @@ export default function WithArrays() {
     </div>
   );
 }
-
-

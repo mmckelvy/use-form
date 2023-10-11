@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
+import joi from 'joi';
 
 import useForm from 'useForm';
 
-export default function Undo() {
-  const { fields, handleChange, setFields, handleSubmit } = useForm({
+export default function Experimental() {
+  const f = {
     firstName: {
       value: ''
     },
     lastName: {
-      value: ''
-    }
+      value: '',
+    },
+  };
+
+  const schema = joi.object({
+    firstName: joi.string().required().label('First Name'),
+    lastName: joi.string().required()
   });
+
+  const { fields, handleChange, handleSubmit } = useForm(f);
 
   const [ valuesDisplay, setValuesDisplay ] = useState({});
   const [ fieldsDisplay, setFieldsDisplay ] = useState({});
+  const [ errorsDisplay, setErrorsDisplay ] = useState({});
 
   return (
     <div
@@ -47,12 +56,20 @@ export default function Undo() {
 
           <input
             name="firstName"
-            data-cy="firstNameInput"
             value={fields.firstName.value}
             onChange={handleChange}
+            data-cy="firstNameInput"
           />
 
-          <span style={{color: 'red'}}>{fields.firstName.error}</span>
+          <span
+            data-cy="firstNameError"
+            style={{
+              color: 'red',
+              fontSize: '12px'
+            }}>
+
+            {fields.firstName.error}
+          </span>
 
         </div>
 
@@ -69,61 +86,58 @@ export default function Undo() {
 
           <input
             name="lastName"
-            data-cy="lastNameInput"
             value={fields.lastName.value}
             onChange={handleChange}
+            data-cy="lastNameInput"
           />
 
-          <span style={{color: 'red'}}>{fields.lastName.error}</span>
+          <span
+            style={{
+              color: 'red',
+              fontSize: '12px'
+            }}>
+
+            {fields.lastName.error}
+          </span>
 
         </div>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'max-content max-content',
-            justifyContent: 'space-between'
+        <button
+          type="button"
+          style={{width: '25%'}}
+          data-cy="submit"
+          onClick={() => {
+            const { isValid, values, errors } = handleSubmit({
+              schema,
+              validate: false,
+              preValidate: false
+            });
+            setValuesDisplay(values);
+            setErrorsDisplay(errors);
           }}>
 
-          <button
-            type="button"
-            data-cy="snapshot"
-            onClick={() => {
-              setFields([
-                {
-                  path: 'firstName.snapshot',
-                  value: fields.firstName.value
-                },
-                {
-                  path: 'lastName.snapshot',
-                  value: fields.lastName.value
-                },
-              ]);
-            }}>
+          Submit
+        </button>
+      </div>
 
-            Create Snapshot
-          </button>
 
-          <button
-            type="button"
-            data-cy="undo"
-            onClick={() => {
-              setFields([
-                {
-                  path: 'firstName.value',
-                  value: fields.firstName.snapshot
-                },
-                {
-                  path: 'lastName.value',
-                  value: fields.lastName.snapshot
-                },
-              ]);
-            }}>
+      {/* Serialized Values */}
+      <div>
+        <span>Serialized Values:</span>
+        <pre
+          data-cy="results">
 
-            Undo
-          </button>
-        </div>
+          {JSON.stringify(valuesDisplay, null, 2)}
+        </pre>
+      </div>
 
+      {/* Errors */}
+      <div>
+        <span>Errors:</span>
+        <pre>
+
+          {JSON.stringify(errorsDisplay, null, 2)}
+        </pre>
       </div>
 
       {/* Fields */}
@@ -136,25 +150,18 @@ export default function Undo() {
 
         <button
           type="button"
-          data-cy="viewFields"
           style={{width: '25%'}}
           onClick={() => {
             console.log(fields);
             setFieldsDisplay(fields);
-
           }}>
 
           View Fields
         </button>
 
         <span>Fields:</span>
-        <pre
-          data-cy="fields">
-
-          {JSON.stringify(fieldsDisplay, null, 2)}
-        </pre>
+        <pre>{JSON.stringify(fieldsDisplay, null, 2)}</pre>
       </div>
-
 
     </div>
   );

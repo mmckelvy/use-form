@@ -4,7 +4,7 @@ import structure from './structure.js';
 /*
 
 */
-export default function preValidateForm({ _fields }) {
+export default function preValidateForm({ _fields, skipPreValidation }) {
   const results = {};
 
   for (let [ flatPath, val ] of Object.entries(_fields)) {
@@ -22,7 +22,7 @@ export default function preValidateForm({ _fields }) {
         return acc;
       }, {});
 
-      results[flatPath] = !field.preValidate
+      results[flatPath] = skipPreValidation || !field.preValidate
         ? val
         : field.preValidate({
             value: val,

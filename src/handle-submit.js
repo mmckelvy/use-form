@@ -2,6 +2,8 @@ import preValidateForm from './pre-validate-form.js';
 import validateForm from './validate-form.js';
 import serializeForm from './serialize-form.js';
 import filterFields from './filter-fields.js';
+import applySchemaValidation from './apply-schema-validation.js';
+import buildUpdate from './build-update';
 
 /*
 Pre-validates, validates, and then serializes a set of _fields.
@@ -40,18 +42,76 @@ becomes:
   address: '123 Fake Street'
 }
 */
-export default function handleSubmit({ _fields, _setFields, fields }) {
+export default function handleSubmit({
+  _fields,
+  _setFields,
+  fields,
+  preValidate,
+  validate,
+  schema
+}) {
   // Filter any fields if necessary.
   const f = filterFields({_fields, fields});
 
-  const preValidated = preValidateForm({_fields: f});
+  const preValidated = preValidate
+    ? preValidateForm({_fields: f, skipPreValidation: !preValidate})
+    : f
+  ;
 
-  const { isValid, _validatedFields } = validateForm({
+  const results = {};
+
+  /*
+  If 'validate' is false or 'schema' is true, the default
+  validation will not run.  This will just clear any errors that
+  were previously set.
+  */
+  const {
+    isValid: isValidDefault,
+    _validatedFields,
+    errors: defaultErrors
+  } = validateForm({
     _preValidatedFields: preValidated,
-    _setFields
+    _setFields,
+    skipValidation: !validate || schema
   });
 
-  const values = serializeForm({_validatedFields});
+  results.errors = defaultErrors;
 
-  return {isValid, values};
+  // Set the overall 'isValid' based on the results of the default
+  // validation.
+  results.isValid = isValidDefault;
+
+  const values = serializeForm({_validatedFields});
+  results.values = values;
+
+  // Apply schema validation if necessary.  Schema validation
+  // occurs after serialization because it can only be applied to serialized
+  // results.
+  if (schema && validate) {
+    const {
+      isValid: isValidSchema,
+      fieldUpdates,
+      errors: schemaErrors
+    } = applySchemaValidation({
+      _fields,
+      values,
+      schema
+    });
+
+    // Update the results with the results of the schema validation.
+    results.isValid = isValidSchema;
+    results.errors = schemaErrors;
+
+    // Update the error fields with any new errors as appropriate.
+    if (fieldUpdates.length) {
+      _setFields((prevFields) => {
+        return {
+          ...prevFields,
+          ...buildUpdate(fieldUpdates)
+        };
+      });
+    }
+  }
+
+  return results;
 }

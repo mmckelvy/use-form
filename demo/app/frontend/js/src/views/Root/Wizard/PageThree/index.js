@@ -80,13 +80,14 @@ export default function PageThree({
         <button
           type="button"
           onClick={() => {
-            const { isValid, values } = handleSubmit({
+            const { isValid, values, errors } = handleSubmit({
               fields: [
                 {path: 'payment'}
               ]
             });
 
             console.log(values);
+            console.log(errors);
 
             if (isValid) {
               setPage(4);

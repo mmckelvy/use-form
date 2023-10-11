@@ -78,13 +78,14 @@ export default function PageOne({
         <button
           type="button"
           onClick={() => {
-            const { isValid, values } = handleSubmit({
+            const { isValid, values, errors } = handleSubmit({
               fields: [
                 {path: 'basics'}
               ]
             });
 
             console.log(values);
+            console.log(errors);
 
             if (isValid) {
               setPage(2);

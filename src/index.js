@@ -55,8 +55,20 @@ export default function useForm(initialFields = {}) {
     handleChange: (e) => {
       _handleChange(e, _setFields);
     },
-    handleSubmit: ({ fields } = {}) => {
-      return _handleSubmit({_fields, _setFields, fields});
+    handleSubmit: ({
+      fields,
+      preValidate = true,
+      validate = true,
+      schema
+    } = {}) => {
+      return _handleSubmit({
+        _fields,
+        _setFields,
+        fields,
+        preValidate,
+        validate,
+        schema
+      });
     },
     setFields: (update) => {
       _setFields((prevFields) => {
